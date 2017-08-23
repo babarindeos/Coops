@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MainApp", "MainApp\MainApp.csproj", "{A8FD49F1-9133-4215-ABDF-FD6F4EEB6FCF}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://iportalon.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = MainApp\\MainApp.csproj
+		SccProjectName1 = MainApp
+		SccLocalPath1 = MainApp
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A8FD49F1-9133-4215-ABDF-FD6F4EEB6FCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8FD49F1-9133-4215-ABDF-FD6F4EEB6FCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8FD49F1-9133-4215-ABDF-FD6F4EEB6FCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8FD49F1-9133-4215-ABDF-FD6F4EEB6FCF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
