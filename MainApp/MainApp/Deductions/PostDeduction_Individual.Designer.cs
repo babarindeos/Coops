@@ -57,7 +57,7 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.lblPrevDeductionsCount = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnExport = new System.Windows.Forms.Button();
             this.dtGridVPreviousDeductions = new System.Windows.Forms.DataGridView();
             this.memberPersonalInfo = new System.Windows.Forms.Label();
             this.memberPic = new System.Windows.Forms.PictureBox();
@@ -82,7 +82,7 @@
             this.groupBox1.Size = new System.Drawing.Size(211, 64);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Select Member By FileNo";
+            this.groupBox1.Text = "Select Member By File No";
             // 
             // btnFindMember
             // 
@@ -170,6 +170,8 @@
             this.txtChangeLoanAmount.Name = "txtChangeLoanAmount";
             this.txtChangeLoanAmount.Size = new System.Drawing.Size(139, 23);
             this.txtChangeLoanAmount.TabIndex = 5;
+            this.txtChangeLoanAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtChangeLoanAmount.Leave += new System.EventHandler(this.txtChangeLoanAmount_Leave);
             // 
             // label4
             // 
@@ -243,7 +245,9 @@
             this.txtChangeSavingsAmt.Name = "txtChangeSavingsAmt";
             this.txtChangeSavingsAmt.Size = new System.Drawing.Size(139, 23);
             this.txtChangeSavingsAmt.TabIndex = 3;
+            this.txtChangeSavingsAmt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtChangeSavingsAmt.TextChanged += new System.EventHandler(this.txtChangeSavingsAmt_TextChanged);
+            this.txtChangeSavingsAmt.Leave += new System.EventHandler(this.txtChangeSavingsAmt_Leave);
             // 
             // label3
             // 
@@ -290,6 +294,7 @@
             // btnPostDeduction
             // 
             this.btnPostDeduction.Enabled = false;
+            this.btnPostDeduction.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPostDeduction.Location = new System.Drawing.Point(186, 51);
             this.btnPostDeduction.Name = "btnPostDeduction";
             this.btnPostDeduction.Size = new System.Drawing.Size(101, 32);
@@ -327,7 +332,7 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.lstMonthlyDeductions);
-            this.groupBox3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(7, 101);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(846, 119);
@@ -349,7 +354,7 @@
             // 
             this.groupBox4.Controls.Add(this.lblPrevDeductionsCount);
             this.groupBox4.Controls.Add(this.button3);
-            this.groupBox4.Controls.Add(this.button2);
+            this.groupBox4.Controls.Add(this.btnExport);
             this.groupBox4.Controls.Add(this.dtGridVPreviousDeductions);
             this.groupBox4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox4.Location = new System.Drawing.Point(7, 227);
@@ -370,21 +375,27 @@
             // 
             // button3
             // 
+            this.button3.Image = global::MainApp.Properties.Resources.Text;
+            this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button3.Location = new System.Drawing.Point(778, 260);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(64, 30);
             this.button3.TabIndex = 2;
             this.button3.Text = "Print";
+            this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button3.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btnExport
             // 
-            this.button2.Location = new System.Drawing.Point(714, 260);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(62, 30);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Export";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnExport.Image = global::MainApp.Properties.Resources.excel;
+            this.btnExport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnExport.Location = new System.Drawing.Point(700, 260);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(76, 30);
+            this.btnExport.TabIndex = 1;
+            this.btnExport.Text = "Export";
+            this.btnExport.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnExport.UseVisualStyleBackColor = true;
             // 
             // dtGridVPreviousDeductions
             // 
@@ -420,6 +431,7 @@
             // 
             // PostDeduction_Individual
             // 
+            this.AcceptButton = this.btnFindMember;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1213, 526);
@@ -435,6 +447,7 @@
             this.Name = "PostDeduction_Individual";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Post Deduction | Individual";
+            this.Load += new System.EventHandler(this.PostDeduction_Individual_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -466,7 +479,7 @@
         private System.Windows.Forms.TextBox txtFindByFileNo;
         private System.Windows.Forms.ListView lstMonthlyDeductions;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.Label lblPrevDeductionsCount;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Button btnPostDeduction;

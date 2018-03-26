@@ -22,13 +22,16 @@ namespace MainApp
         string repaymentLoanType;
         bool servicingLoan = false;
         bool loanMoreThanSavings = false;
+        string userId;
 
 
 
-        public PostDeductions()
+        public PostDeductions(string UserID)
         {
             InitializeComponent();
 
+            userId = UserID;
+            
             //LstDeduction Properties
             lstDeductions.View = View.Details;
             lstDeductions.FullRowSelect = true;
@@ -49,10 +52,22 @@ namespace MainApp
             lstDeductions.Columns[5].TextAlign = HorizontalAlignment.Right;
             lstDeductions.Columns[6].TextAlign = HorizontalAlignment.Right;
 
+            //lstViewDeductionList
+            lstVwDeductionList.View = View.Details;
+            lstVwDeductionList.FullRowSelect = true;
+
+            lstVwDeductionList.Columns.Add("Month",75);
+            lstVwDeductionList.Columns.Add("Year",40);
+
 
             //populate cboMonth and cboYear
             populateCboMonth();
             populateCboYear();
+
+            //get previous deduction dates
+            getPreviousDeductionDate();
+            getDeductionList();
+
            
         }
 
@@ -357,11 +372,12 @@ namespace MainApp
             bool isAlreadyPosted = checkIfAlreadyPosted(selMonth, selYear);
             if (isAlreadyPosted == false)
             {
-                DialogResult res = MessageBox.Show("Do you want to execute posting for the selected Month and Year?\n " +
+                DialogResult res = MessageBox.Show("Do you want to execute posting for the selected Month and Year? " +
                     "Please be sure about this because this process is not reversible", "Deduction Info", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (res == DialogResult.Yes)
                 {
+
                     executeDeduction();
                 }
             }
@@ -380,7 +396,7 @@ namespace MainApp
             bool result;
 
             SqlConnection conn = ConnectDB.GetConnection();
-            string strQuery = "select count(*) from Deductions where Month=@Month and Year=@Year";
+            string strQuery = "select count(*) from DeductionDates where Month=@Month and Year=@Year";
             SqlCommand cmd = new SqlCommand(strQuery, conn);
 
             cmd.Parameters.Add("@Month", SqlDbType.Int);
@@ -448,20 +464,20 @@ namespace MainApp
 
                     Deduction newPosting = new Deduction();
                     string postSavingsStatus  = newPosting.postSavings(conn, cmd, sqlTrans, memberID, transactionID, totalSavings, numOfRows, errorflag, selectedMonth, selectedYear);
-                    MessageBox.Show("Post Savings Status: " + postSavingsStatus);
+                    //MessageBox.Show("Post Savings Status: " + postSavingsStatus);
                     
                     string postLoansStatus = newPosting.postLoans(conn, cmd, sqlTrans, memberID, transactionID, currentRecord, selectedMonth, selectedYear, numOfRows, errorflag, monthlyLoanRepayment);
-                    MessageBox.Show("PostLoan Status: " + postLoansStatus);
+                    //MessageBox.Show("PostLoan Status: " + postLoansStatus);
 
                     string recordDeductionStatus = newPosting.recordDeduction(cmd, memberID, transactionID, currentRecord, selectedMonth, selectedYear, lstAllSavingsDeduction, lstAllLoansDeduction, lstTotalDeductions, numOfRows, errorflag);
-                    MessageBox.Show("Record Deductions status: " + recordDeductionStatus);
+                    //MessageBox.Show("Record Deductions status: " + recordDeductionStatus);
 
                     string recordDeductionDetailsStatus = newPosting.recordDeductionDetails(cmd, memberID, transactionID, currentRecord, numOfRows, errorflag, lstAllSavingsDeduction, lstAllLoansDeduction, repaymentLoanType, servicingLoan, loanMoreThanSavings);
-                    MessageBox.Show("Record Deduction Detail Status: " + recordDeductionDetailsStatus);
+                    //MessageBox.Show("Record Deduction Detail Status: " + recordDeductionDetailsStatus);
 
                     if (errorflag == 0)
                     {
-                        MessageBox.Show("Posted");
+                        //MessageBox.Show("Posted");
                         //lstDeductions.Items[currentRecord].SubItems[7].Text = "Posted";
                     }
                 }
@@ -471,13 +487,26 @@ namespace MainApp
 
                 if (errorflag == 0)
                 {
-                    sqlTrans.Commit();
-                    MessageBox.Show("Transaction committed");
+                    Deduction newDeductionPosting = new Deduction();
+                    string deductionDateRecord = newDeductionPosting.recordDeductionDate(selectedMonth,selectedYear);
+                    if (deductionDateRecord == "1")
+                    {
+                        sqlTrans.Commit();
+                        MessageBox.Show("Transaction has been Successfully Posted");
+                        getDeductionList();
+                        ActivityLog.logActivity(userId, "Post Deduction - Collective", "Deduction Posting for Month:" + selectedMonth + " " + selectedYear);
+
+                    }
+                    else
+                    {
+                        sqlTrans.Rollback();
+                        MessageBox.Show("Posting Transaction Failed");
+                    }
                 }
                 else
                 {
                     sqlTrans.Rollback();
-                    MessageBox.Show("Transaction Failed");
+                    MessageBox.Show("Posting Transaction Failed");
                 }
 
             }
@@ -646,12 +675,148 @@ namespace MainApp
             }
             #endregion end of if statement
         }
-   
-    
-    }
-        
 
-        
+
+        private void getPreviousDeductionDate()
+        {
+            SqlConnection conn = ConnectDB.GetConnection();
+            string strQuery = "Select d.DeductionID, m.Month + ' ' + d.Year as DeductionMonthYear, d.DatePosted  from Deductions d left join MonthByName m" +
+                " on d.Month=m.MonthID order by DeductionID desc";
+            SqlCommand cmd = conn.CreateCommand();
+            cmd.CommandText = strQuery;
+
+            try
+            {
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader(CommandBehavior.SingleResult);
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    lblPreviousPosting.Text = "Previous Deductions: " + reader["DeductionMonthYear"].ToString() + Environment.NewLine + "Posted " + reader["DatePosted"].ToString();
+                }
+                else
+                {
+                    lblPreviousPosting.Text = "No Previous Deductions";
+                }
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+        }
+
+        private void getDeductionList()
+        {
+            SqlConnection conn = ConnectDB.GetConnection();
+            string strQuery = "Select m.Month, d.Year from DeductionDates d left join MonthByName m " +
+                "on m.MonthID=d.Month order by DeductionDateID";
+            SqlCommand cmd = new SqlCommand(strQuery, conn);
+
+            try
+            {
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    lstVwDeductionList.Items.Clear();
+
+                    while(reader.Read())
+                    {
+                        String[] row = {reader["Month"].ToString(), reader["Year"].ToString()};
+                        ListViewItem item = new ListViewItem(row);
+                        lstVwDeductionList.Items.Add(item);
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        private void btnViewSelectedDeduction_Click(object sender, EventArgs e)
+        {
+            string month = string.Empty;
+            string year = string.Empty;
+
+            if (lstVwDeductionList.SelectedItems.Count > 0)
+            {
+                month = lstVwDeductionList.SelectedItems[0].SubItems[0].Text.ToString();
+                year = lstVwDeductionList.SelectedItems[0].SubItems[1].Text.ToString();
+
+                #region Date Resolution
+                switch (month)
+                {
+                    case "January":
+                        month = "1";
+                        break;
+                    case "Febraury":
+                        month = "2";
+                        break;
+                    case "March":
+                        month = "3";
+                        break;
+                    case "April":
+                        month = "4";
+                        break;
+                    case "May":
+                        month = "5";
+                        break;
+                    case "June":
+                        month = "6";
+                        break;
+                    case "July":
+                        month = "7";
+                        break;
+                    case "August":
+                        month = "8";
+                        break;
+                    case "September":
+                        month = "9";
+                        break;
+                    case "October":
+                        month = "10";
+                        break;
+                    case "November":
+                        month = "11";
+                        break;
+                    case "December":
+                        month = "12";
+                        break;
+                }
+                #endregion
+
+
+                ViewDeductions viewDeductions = new ViewDeductions(month,year);
+                viewDeductions.MdiParent = this.ParentForm;
+                viewDeductions.Show();
+
+                
+            }
+            else
+            {
+                MessageBox.Show("Select a date item to view details.", "Deduction Dates", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            ExportData exportSavingsDetails = new ExportData();
+            
+            //exportSavingsDetails.ExportToExcel(lstDeductions, saveFD);
+        }
+    } 
 
 
 }

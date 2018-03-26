@@ -97,6 +97,7 @@
             // 
             // picMember
             // 
+            this.picMember.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picMember.Location = new System.Drawing.Point(271, 4);
             this.picMember.Name = "picMember";
             this.picMember.Size = new System.Drawing.Size(78, 75);
@@ -159,6 +160,7 @@
             // 
             // DeleteSavingsForward
             // 
+            this.AcceptButton = this.btnFindMember;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1142, 573);

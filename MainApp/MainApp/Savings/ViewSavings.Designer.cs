@@ -201,7 +201,8 @@
             "",
             "Contribution",
             "Deduction",
-            "Loan"});
+            "Loan",
+            "Withdrawal"});
             this.cboSourceSearch.Location = new System.Drawing.Point(186, 27);
             this.cboSourceSearch.Name = "cboSourceSearch";
             this.cboSourceSearch.Size = new System.Drawing.Size(97, 23);
@@ -261,20 +262,26 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(1032, 234);
+            this.button2.Image = global::MainApp.Properties.Resources.Text;
+            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button2.Location = new System.Drawing.Point(1038, 234);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(68, 26);
+            this.button2.Size = new System.Drawing.Size(62, 26);
             this.button2.TabIndex = 3;
             this.button2.Text = "Print";
+            this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button2.UseVisualStyleBackColor = true;
             // 
             // btnExportSavings
             // 
-            this.btnExportSavings.Location = new System.Drawing.Point(964, 234);
+            this.btnExportSavings.Image = global::MainApp.Properties.Resources.excel;
+            this.btnExportSavings.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnExportSavings.Location = new System.Drawing.Point(960, 234);
             this.btnExportSavings.Name = "btnExportSavings";
-            this.btnExportSavings.Size = new System.Drawing.Size(68, 26);
+            this.btnExportSavings.Size = new System.Drawing.Size(76, 26);
             this.btnExportSavings.TabIndex = 2;
             this.btnExportSavings.Text = "Export";
+            this.btnExportSavings.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnExportSavings.UseVisualStyleBackColor = true;
             this.btnExportSavings.Click += new System.EventHandler(this.btnExportSavings_Click);
             // 
@@ -334,20 +341,26 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(1032, 170);
+            this.button3.Image = global::MainApp.Properties.Resources.Text;
+            this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button3.Location = new System.Drawing.Point(1038, 170);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(68, 26);
+            this.button3.Size = new System.Drawing.Size(62, 26);
             this.button3.TabIndex = 5;
             this.button3.Text = "Print";
+            this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button3.UseVisualStyleBackColor = true;
             // 
             // btnExportSavingsDetails
             // 
-            this.btnExportSavingsDetails.Location = new System.Drawing.Point(964, 170);
+            this.btnExportSavingsDetails.Image = global::MainApp.Properties.Resources.excel;
+            this.btnExportSavingsDetails.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnExportSavingsDetails.Location = new System.Drawing.Point(960, 170);
             this.btnExportSavingsDetails.Name = "btnExportSavingsDetails";
-            this.btnExportSavingsDetails.Size = new System.Drawing.Size(68, 26);
+            this.btnExportSavingsDetails.Size = new System.Drawing.Size(76, 26);
             this.btnExportSavingsDetails.TabIndex = 4;
             this.btnExportSavingsDetails.Text = "Export";
+            this.btnExportSavingsDetails.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnExportSavingsDetails.UseVisualStyleBackColor = true;
             this.btnExportSavingsDetails.Click += new System.EventHandler(this.btnExportSavingsDetails_Click);
             // 
@@ -360,6 +373,7 @@
             this.datGridSavingsDetails.Name = "datGridSavingsDetails";
             this.datGridSavingsDetails.Size = new System.Drawing.Size(1089, 149);
             this.datGridSavingsDetails.TabIndex = 0;
+            this.datGridSavingsDetails.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.datGridSavingsDetails_CellContentClick);
             // 
             // groupBox4
             // 

@@ -17,6 +17,8 @@ namespace MainApp
         private string lastname;
         private string firstname;
 
+        private string loanApproval;
+
         public MainApp(string UserID, string Lastname, string Firstname)
         {
             InitializeComponent();
@@ -25,6 +27,8 @@ namespace MainApp
             userId = UserID;
             lastname = Lastname;
             firstname = Firstname;
+
+            loanApproval = string.Empty;
 
             string ActivityType = "LogIn";
             string Description = Lastname + " " + Firstname + " with UserID [" + userId + "] logged In";
@@ -112,9 +116,9 @@ namespace MainApp
 
         private void memberListToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //MembersList membersList = new MembersList();
-            //membersList.MdiParent = this;
-            //membersList.Show();
+             MembersList membersList = new MembersList();
+             membersList.MdiParent = this;
+             membersList.Show();
         }
 
         private void findMemberToolStripMenuItem_Click(object sender, EventArgs e)
@@ -212,14 +216,14 @@ namespace MainApp
 
         private void collectiveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PostDeductions postDeductions = new PostDeductions();
+            PostDeductions postDeductions = new PostDeductions(userId);
             postDeductions.MdiParent = this;
             postDeductions.Show();
         }
 
         private void individualToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PostDeduction_Individual postIndividualDeduction = new PostDeduction_Individual();
+            PostDeduction_Individual postIndividualDeduction = new PostDeduction_Individual(userId);
             postIndividualDeduction.MdiParent = this;
             postIndividualDeduction.Show();
         }
@@ -243,6 +247,16 @@ namespace MainApp
         private void MainApp_Load(object sender, EventArgs e)
         {
             //((MainApp)this.MdiParent).toolStripStatusLoggedInUser.Text = "Seyibabs";
+            lblLoggedInUserID.Text = userId;
+            lblLoggedInUserName.Text = lastname.ToString().ToUpper() + ' ' + firstname.ToString();
+
+            //toolStripStatusOps.Text = "Progress...";
+            //statusStrip1.Refresh();
+
+            toolStripStatusLblSpring.Text = string.Empty;
+
+            toolStripStatusLblLoggedInUser.Text = "Logged In User: " + lblLoggedInUserName.Text;
+
             
         }
 
@@ -286,7 +300,10 @@ namespace MainApp
 
         private void viewDeductionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ViewDeductions viewductions = new ViewDeductions();
+            string month = string.Empty;
+            string year = string.Empty;
+
+            ViewDeductions viewductions = new ViewDeductions(month,year);
             viewductions.MdiParent = this;
             viewductions.Show();
         }
@@ -360,6 +377,79 @@ namespace MainApp
             deleteLoanApplication.MdiParent = this;
             deleteLoanApplication.Show();
         }
+
+        private void membershipToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void makeWithdrawalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MakeWithdrawal makewithdrawal = new MakeWithdrawal(userId);
+            makewithdrawal.MdiParent = this;
+            makewithdrawal.Show();
+        }
+
+        private void deleteWithdrawalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DeleteWithdrawal deleteWithdrawal = new DeleteWithdrawal(userId);
+            deleteWithdrawal.MdiParent = this;
+            deleteWithdrawal.Show();
+
+        }
+
+        private void newLoanBFToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NewLoanBroughtForward newLoanBroughtForward = new NewLoanBroughtForward(userId);
+            newLoanBroughtForward.MdiParent = this;
+            newLoanBroughtForward.Show();
+        }
+
+        private void editToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            EditLoansBroughtForward editLoansBroughtForward = new EditLoansBroughtForward(userId);
+            editLoansBroughtForward.MdiParent = this;
+            editLoansBroughtForward.Show();
+        }
+
+        private void deleteToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            DeleteLoanBroughtForward deleteLoanBroughtForward = new DeleteLoanBroughtForward(userId);
+            deleteLoanBroughtForward.MdiParent = this;
+            deleteLoanBroughtForward.Show();
+        }
+
+       
+        private void viewLoansToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            loanApproval = "Yes";
+            ViewLoanApplication viewLoanApplication = new ViewLoanApplication(loanApproval);
+            viewLoanApplication.MdiParent = this;
+            viewLoanApplication.Show();
+        }
+
+        private void viewApplicationsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ViewLoanApplication viewApplicationLoan = new ViewLoanApplication(loanApproval);
+            viewApplicationLoan.MdiParent = this;
+            viewApplicationLoan.Show();
+        }
+
+        private void deleteDeductionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UnpostDeductions unpostDeductions = new UnpostDeductions(userId);
+            unpostDeductions.MdiParent = this;
+            unpostDeductions.Show();
+        }
+
+        private void memberSavingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmRprtMemberSavings frmRprtMemberSavings = new FrmRprtMemberSavings();
+            frmRprtMemberSavings.MdiParent = this;
+            frmRprtMemberSavings.Show();
+        }
+
+       
 
         
     }

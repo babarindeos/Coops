@@ -403,7 +403,7 @@ namespace MainApp
             {
                 if (open.CheckFileExists)
                 {
-                    string paths = Application.StartupPath.Substring(0, (Application.StartupPath.Length - 10));
+                    string paths = PhotoPath.getPath();
                     string correctFileName = System.IO.Path.GetFileName(open.FileName);
                     string fileSuffix = DateTime.Now.ToString("dd_MM_yy_hh_mm_ss");
                     try
@@ -428,7 +428,7 @@ namespace MainApp
 
         private void btnClearPic_Click(object sender, EventArgs e)
         {
-            string paths = Application.StartupPath.Substring(0, (Application.StartupPath.Length - 10));
+            string paths = PhotoPath.getPath();
             picMember.Image = Image.FromFile(paths + "\\photos\\profile_img.png");
             photoName = string.Empty;
         }
@@ -674,7 +674,7 @@ namespace MainApp
                     cmdSavingsRegular.Parameters["@Amount"].Value = RegularSavings;
 
                     cmdSavingsRegular.Parameters.Add("@Remark", SqlDbType.NVarChar, 50, "Remark");
-                    cmdSavingsRegular.Parameters["@Remark"].Value = "Personal Savings";
+                    cmdSavingsRegular.Parameters["@Remark"].Value = "Shares Savings";
 
                     cmdSavingsRegular.Transaction = sqlTrans;
 

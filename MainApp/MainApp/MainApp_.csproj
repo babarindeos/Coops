@@ -1,0 +1,640 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A8FD49F1-9133-4215-ABDF-FD6F4EEB6FCF}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MainApp</RootNamespace>
+    <AssemblyName>MainApp</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>C:\Users\seyibabs\Desktop\AppDeployment - OORBDA\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ProductName>Coops</ProductName>
+    <PublisherName>GMERK</PublisherName>
+    <SuiteName>OORBDA Coops</SuiteName>
+    <ApplicationRevision>8</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>B22A173ACFD177035C5C7C48050B0D2A91763D3D</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>MainApp_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classes\ActivityLog.cs" />
+    <Compile Include="Classes\Banks.cs" />
+    <Compile Include="Classes\BuildTempSavingsAcctType.cs" />
+    <Compile Include="Classes\CheckForNumber.cs" />
+    <Compile Include="DeleteWithdrawal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DeleteWithdrawal.Designer.cs">
+      <DependentUpon>DeleteWithdrawal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditLoansBroughtForward.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditLoansBroughtForward.Designer.cs">
+      <DependentUpon>EditLoansBroughtForward.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Withdrawal\MakeWithdrawal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Withdrawal\MakeWithdrawal.Designer.cs">
+      <DependentUpon>MakeWithdrawal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NewLoanBroughtForward.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewLoanBroughtForward.Designer.cs">
+      <DependentUpon>NewLoanBroughtForward.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SavingsByAcctType.cs" />
+    <Compile Include="Settings\CreateLoanCategory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Settings\CreateLoanCategory.Designer.cs">
+      <DependentUpon>CreateLoanCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\CreateLoanType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Settings\CreateLoanType.Designer.cs">
+      <DependentUpon>CreateLoanType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DatasetMembers.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatasetMembers.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\DateFunction.cs" />
+    <Compile Include="Classes\Deduction.cs" />
+    <Compile Include="Loans\DeleteLoanApplication.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Loans\DeleteLoanApplication.Designer.cs">
+      <DependentUpon>DeleteLoanApplication.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\PhotoPath.cs" />
+    <Compile Include="Savings\DeleteSavingsForward.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Savings\DeleteSavingsForward.Designer.cs">
+      <DependentUpon>DeleteSavingsForward.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\Departments.cs" />
+    <Compile Include="Contributions\EditContributions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Contributions\EditContributions.Designer.cs">
+      <DependentUpon>EditContributions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Savings\EditSavingsForward.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Savings\EditSavingsForward.Designer.cs">
+      <DependentUpon>EditSavingsForward.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\ExportData.cs" />
+    <Compile Include="FrmGenerateMemberProfileByFileNo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmGenerateMemberProfileByFileNo.Designer.cs">
+      <DependentUpon>FrmGenerateMemberProfileByFileNo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmReportMemberProfile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmReportMemberProfile.Designer.cs">
+      <DependentUpon>FrmReportMemberProfile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmReportMembers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmReportMembers.Designer.cs">
+      <DependentUpon>FrmReportMembers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Loans\LoanApplication.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Loans\LoanApplication.Designer.cs">
+      <DependentUpon>LoanApplication.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Loans\LoanApplicationApproval.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Loans\LoanApplicationApproval.Designer.cs">
+      <DependentUpon>LoanApplicationApproval.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Members\MembershipWithdrawal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Members\MembershipWithdrawal.Designer.cs">
+      <DependentUpon>MembershipWithdrawal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Members\EditMember.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Members\EditMember.Designer.cs">
+      <DependentUpon>EditMember.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Loans\PostLoanRepayment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Loans\PostLoanRepayment.Designer.cs">
+      <DependentUpon>PostLoanRepayment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Deductions\PostDeductions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Deductions\PostDeductions.Designer.cs">
+      <DependentUpon>PostDeductions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Deductions\PostDeduction_Individual.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Deductions\PostDeduction_Individual.Designer.cs">
+      <DependentUpon>PostDeduction_Individual.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Savings\SavingsForward.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Savings\SavingsForward.Designer.cs">
+      <DependentUpon>SavingsForward.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Savings\EditMemberSavings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Savings\EditMemberSavings.Designer.cs">
+      <DependentUpon>EditMemberSavings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\FieldValidator.cs" />
+    <Compile Include="Members\FindMember.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Members\FindMember.Designer.cs">
+      <DependentUpon>FindMember.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Contributions\MakeContributions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Contributions\MakeContributions.Designer.cs">
+      <DependentUpon>MakeContributions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Members\MemberProfile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Members\MemberProfile.Designer.cs">
+      <DependentUpon>MemberProfile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Members\MembersList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Members\MembersList.Designer.cs">
+      <DependentUpon>MembersList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SavingsType\CreateSavingsType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SavingsType\CreateSavingsType.Designer.cs">
+      <DependentUpon>CreateSavingsType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Banks\AddBank.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Banks\AddBank.Designer.cs">
+      <DependentUpon>AddBank.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Banks\DeleteBank.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Banks\DeleteBank.Designer.cs">
+      <DependentUpon>DeleteBank.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\DeleteDepartment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Departments\DeleteDepartment.Designer.cs">
+      <DependentUpon>DeleteDepartment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\AddDepartment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Departments\AddDepartment.Designer.cs">
+      <DependentUpon>AddDepartment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\EditDepartment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Departments\EditDepartment.Designer.cs">
+      <DependentUpon>EditDepartment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Banks\EditBank.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Banks\EditBank.Designer.cs">
+      <DependentUpon>EditBank.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SavingsType\EditSavingsType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SavingsType\EditSavingsType.Designer.cs">
+      <DependentUpon>EditSavingsType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FUNAAB_CTCS.cs">
+      <DependentUpon>FUNAAB_CTCS.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Members\AddMember.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Members\AddMember.Designer.cs">
+      <DependentUpon>AddMember.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\ConnectDB.cs" />
+    <Compile Include="FUNAAB_CTCS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FUNAAB_CTCS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="MainApp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainApp.Designer.cs">
+      <DependentUpon>MainApp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Departments\ViewDepartments.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Departments\ViewDepartments.Designer.cs">
+      <DependentUpon>ViewDepartments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Banks\ViewBanks.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Banks\ViewBanks.Designer.cs">
+      <DependentUpon>ViewBanks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Savings\SetUpMemberSavingsAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Savings\SetUpMemberSavingsAccount.Designer.cs">
+      <DependentUpon>SetUpMemberSavingsAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Contributions\ViewContributions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Contributions\ViewContributions.Designer.cs">
+      <DependentUpon>ViewContributions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Savings\ViewSavings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Savings\ViewSavings.Designer.cs">
+      <DependentUpon>ViewSavings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\ShowActivityLog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Settings\ShowActivityLog.Designer.cs">
+      <DependentUpon>ShowActivityLog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Deductions\ViewDeductions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Deductions\ViewDeductions.Designer.cs">
+      <DependentUpon>ViewDeductions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Savings\ViewSavingsDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Savings\ViewSavingsDetails.Designer.cs">
+      <DependentUpon>ViewSavingsDetails.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Contributions\EditContributions.resx">
+      <DependentUpon>EditContributions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Withdrawal\DeleteWithdrawal.resx">
+      <DependentUpon>DeleteWithdrawal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditLoansBroughtForward.resx">
+      <DependentUpon>EditLoansBroughtForward.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Withdrawal\MakeWithdrawal.resx">
+      <DependentUpon>MakeWithdrawal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewLoanBroughtForward.resx">
+      <DependentUpon>NewLoanBroughtForward.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Settings\CreateLoanCategory.resx">
+      <DependentUpon>CreateLoanCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Settings\CreateLoanType.resx">
+      <DependentUpon>CreateLoanType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Loans\DeleteLoanApplication.resx">
+      <DependentUpon>DeleteLoanApplication.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Savings\DeleteSavingsForward.resx">
+      <DependentUpon>DeleteSavingsForward.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Savings\EditSavingsForward.resx">
+      <DependentUpon>EditSavingsForward.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmGenerateMemberProfileByFileNo.resx">
+      <DependentUpon>FrmGenerateMemberProfileByFileNo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmReportMemberProfile.resx">
+      <DependentUpon>FrmReportMemberProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmReportMembers.resx">
+      <DependentUpon>FrmReportMembers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Loans\LoanApplication.resx">
+      <DependentUpon>LoanApplication.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Loans\LoanApplicationApproval.resx">
+      <DependentUpon>LoanApplicationApproval.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Members\MembershipWithdrawal.resx">
+      <DependentUpon>MembershipWithdrawal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Members\EditMember.resx">
+      <DependentUpon>EditMember.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Loans\PostLoanRepayment.resx">
+      <DependentUpon>PostLoanRepayment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Deductions\PostDeductions.resx">
+      <DependentUpon>PostDeductions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Deductions\PostDeduction_Individual.resx">
+      <DependentUpon>PostDeduction_Individual.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportMemberProfile.rdlc" />
+    <EmbeddedResource Include="ReportMembers.rdlc" />
+    <EmbeddedResource Include="Savings\SavingsForward.resx">
+      <DependentUpon>SavingsForward.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Savings\EditMemberSavings.resx">
+      <DependentUpon>EditMemberSavings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Members\FindMember.resx">
+      <DependentUpon>FindMember.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Contributions\MakeContributions.resx">
+      <DependentUpon>MakeContributions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Members\MemberProfile.resx">
+      <DependentUpon>MemberProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Members\MembersList.resx">
+      <DependentUpon>MembersList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SavingsType\CreateSavingsType.resx">
+      <DependentUpon>CreateSavingsType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Banks\AddBank.resx">
+      <DependentUpon>AddBank.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Banks\DeleteBank.resx">
+      <DependentUpon>DeleteBank.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Departments\DeleteDepartment.resx">
+      <DependentUpon>DeleteDepartment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Departments\AddDepartment.resx">
+      <DependentUpon>AddDepartment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Departments\EditDepartment.resx">
+      <DependentUpon>EditDepartment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Banks\EditBank.resx">
+      <DependentUpon>EditBank.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SavingsType\EditSavingsType.resx">
+      <DependentUpon>EditSavingsType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Members\AddMember.resx">
+      <DependentUpon>AddMember.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainApp.resx">
+      <DependentUpon>MainApp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Departments\ViewDepartments.resx">
+      <DependentUpon>ViewDepartments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Banks\ViewBanks.resx">
+      <DependentUpon>ViewBanks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Savings\SetUpMemberSavingsAccount.resx">
+      <DependentUpon>SetUpMemberSavingsAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Contributions\ViewContributions.resx">
+      <DependentUpon>ViewContributions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Savings\ViewSavings.resx">
+      <DependentUpon>ViewSavings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Settings\ShowActivityLog.resx">
+      <DependentUpon>ShowActivityLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Deductions\ViewDeductions.resx">
+      <DependentUpon>ViewDeductions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Savings\ViewSavingsDetails.resx">
+      <DependentUpon>ViewSavingsDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="DatasetMembers.xsc">
+      <DependentUpon>DatasetMembers.xsd</DependentUpon>
+    </None>
+    <None Include="DatasetMembers.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DatasetMembers.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DatasetMembers.xss">
+      <DependentUpon>DatasetMembers.xsd</DependentUpon>
+    </None>
+    <None Include="FUNAAB_CTCS.xsc">
+      <DependentUpon>FUNAAB_CTCS.xsd</DependentUpon>
+    </None>
+    <None Include="FUNAAB_CTCS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>FUNAAB_CTCS.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="FUNAAB_CTCS.xss">
+      <DependentUpon>FUNAAB_CTCS.xsd</DependentUpon>
+    </None>
+    <None Include="MainApp_TemporaryKey.pfx" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Datasets\" />
+    <Folder Include="ReportsUI\" />
+    <Folder Include="Reports\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icons\accounting.jpg" />
+    <Content Include="icons\add.png" />
+    <Content Include="icons\add_icon.png" />
+    <Content Include="icons\add_member.gif" />
+    <Content Include="icons\add_member.png" />
+    <Content Include="icons\cancel.png" />
+    <Content Include="icons\cancelPicture.png" />
+    <Content Include="icons\edit_member.png" />
+    <Content Include="icons\edit_savings.png" />
+    <Content Include="icons\find_icon.png" />
+    <Content Include="icons\loadpicture.png" />
+    <Content Include="icons\members.gif" />
+    <Content Include="icons\minus.png" />
+    <Content Include="icons\profile_img.png" />
+    <Content Include="icons\save.png" />
+    <Content Include="icons\savings.png" />
+    <Content Include="icons\search_member2.png" />
+    <Content Include="photos\profile_img.png" />
+    <None Include="Resources\Yes.gif" />
+    <None Include="Resources\Sync.gif" />
+    <None Include="Resources\Text.gif" />
+    <None Include="Resources\Home.gif" />
+    <None Include="Resources\Turn off.gif" />
+    <None Include="Resources\Unlock.gif" />
+    <None Include="Resources\Erase.gif" />
+    <None Include="Resources\directory3.jpg" />
+    <None Include="Resources\remove-icon-png-26_new.png" />
+    <None Include="Resources\excel.ico" />
+    <None Include="Resources\New document.gif" />
+    <None Include="Resources\Text preview.gif" />
+    <None Include="Resources\create1.png" />
+    <None Include="Resources\create.png" />
+    <None Include="Resources\find_icon.png" />
+    <None Include="Resources\add_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -21,10 +21,12 @@ namespace MainApp
         string repaymentLoanType;
         bool servicingLoan = false;
         bool loanMoreThanSavings = false;
+        string UserId;
 
-        public PostDeduction_Individual()
+        public PostDeduction_Individual(string UserID)
         {
             InitializeComponent();
+            UserId = UserID;
 
             //LstDeduction Properties
             lstMonthlyDeductions.View = View.Details;
@@ -57,11 +59,12 @@ namespace MainApp
             lstVwSavings.FullRowSelect = true;
 
             //lstVwSavings Columns
+            lstVwSavings.Columns.Add("TypeID", 0);
             lstVwSavings.Columns.Add("Type", 100);
             lstVwSavings.Columns.Add("Amount", 100);
 
             //lstVwSavings Alignment
-            lstVwSavings.Columns[1].TextAlign = HorizontalAlignment.Right;
+            lstVwSavings.Columns[2].TextAlign = HorizontalAlignment.Right;
 
 
             //lstVwLoans Properties
@@ -73,6 +76,8 @@ namespace MainApp
             lstVwLoans.Columns.Add("Loan Repayment",100);
             lstVwLoans.Columns.Add("Amount Paid",100);
             lstVwLoans.Columns.Add("Outstanding",100);
+            lstVwLoans.Columns.Add("Loan type", 100);
+            lstVwLoans.Columns.Add("LoanTypeID", 50);
 
             //lstVwLoans Alignment
             lstVwLoans.Columns[0].TextAlign = HorizontalAlignment.Right;
@@ -219,6 +224,13 @@ namespace MainApp
                     getPreviousDeductionDate(memberID);
 
                     btnPostDeduction.Enabled = true;
+
+
+                    //Display Savings and Loan information
+                    //lstMonthlyDeductions_SelectedIndexChanged(sender, e);
+                    string selectedMemberID = lstMonthlyDeductions.Items[0].SubItems[1].Text;
+                    getSavingsInfo(selectedMemberID);
+                    getLoansInfo(selectedMemberID);
                 }
                 else
                 {
@@ -278,6 +290,8 @@ namespace MainApp
                                            reader["Name"].ToString(),CheckForNumber.formatCurrency(reader["Amount"].ToString()),
                                            CheckForNumber.formatCurrency2(loanMonthlyRepayment.ToString()), CheckForNumber.formatCurrency(totalDeduction.ToString())};
                         ListViewItem item = new ListViewItem(row);
+
+                        lstMonthlyDeductions.Items.Clear();
                         lstMonthlyDeductions.Items.Add(item);
 
                     }
@@ -319,7 +333,7 @@ namespace MainApp
                 SqlDataReader loanReader = cmdLoan.ExecuteReader();
                 int recFound = loanReader.Cast<object>().Count();
                 
-                MessageBox.Show("Loan Servicing found: " +  recFound.ToString());
+                //MessageBox.Show("Loan Servicing found: " +  recFound.ToString());
                 loanReader.Close();
 
                 SqlDataReader readerGetLoanInfo = cmdLoan.ExecuteReader(CommandBehavior.SingleRow);
@@ -331,8 +345,7 @@ namespace MainApp
                         monthlyRepayment = Convert.ToDecimal(readerGetLoanInfo["MonthlyRepayment"]);
                         repaymentLoanType = readerGetLoanInfo["LoanType"].ToString();
 
-                        MessageBox.Show("Monthly Loan Repayment: " + readerGetLoanInfo["MonthlyRepayment"].ToString() +
-                          "\nLoan Type: " + repaymentLoanType);
+                        //MessageBox.Show("Monthly Loan Repayment: " + readerGetLoanInfo["MonthlyRepayment"].ToString() +  "\nLoan Type: " + repaymentLoanType);
                     }
                 }
 
@@ -369,6 +382,8 @@ namespace MainApp
                 dtGridVPreviousDeductions.DataSource = dt;
 
                 dtGridVPreviousDeductions.Columns["DeductionID"].HeaderText = "ID";
+                dtGridVPreviousDeductions.Columns["DeductionID"].Width = 50;
+
                 dtGridVPreviousDeductions.Columns["TransactionID"].HeaderText = "Transact. ID";
                 dtGridVPreviousDeductions.Columns["DatePosted"].HeaderText = "Date Posted";
 
@@ -399,11 +414,12 @@ namespace MainApp
 
             int selMonth = (int)cboMonth.SelectedValue;
             int selYear = Convert.ToInt16(cboYear.Text);
+            int selMemberID = memberID;
 
-            bool isAlreadyPosted = checkIfAlreadyPosted(selMonth, selYear);
+            bool isAlreadyPosted = checkIfAlreadyPosted(selMonth, selYear, selMemberID);
             if (isAlreadyPosted == false)
             {
-                DialogResult res = MessageBox.Show("Do you want to execute posting for the selected Month and Year?\n " +
+                DialogResult res = MessageBox.Show("Do you wish to Execute Posting for the selected Member, Month and Year? " +
                     "Please be sure about this because this process is not reversible", "Deduction Info", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (res == DialogResult.Yes)
@@ -418,13 +434,13 @@ namespace MainApp
         }
 
         //check if that posting had been done for that month and year
-        private bool checkIfAlreadyPosted(int month, int year)
+        private bool checkIfAlreadyPosted(int month, int year, int selMember)
         {
             int recFound = 0;
             bool result;
 
             SqlConnection conn = ConnectDB.GetConnection();
-            string strQuery = "select count(*) from Deductions where Month=@Month and Year=@Year";
+            string strQuery = "select count(*) from Deductions where Month=@Month and Year=@Year and MemberID=@selMemberID";
             SqlCommand cmd = new SqlCommand(strQuery, conn);
 
             cmd.Parameters.Add("@Month", SqlDbType.Int);
@@ -432,6 +448,9 @@ namespace MainApp
 
             cmd.Parameters.Add("@Year", SqlDbType.Int);
             cmd.Parameters["@Year"].Value = year;
+
+            cmd.Parameters.Add("@selMemberID", SqlDbType.Int);
+            cmd.Parameters["@selMemberID"].Value = selMember;
 
             try
             {
@@ -488,35 +507,53 @@ namespace MainApp
 
 
                     string transactionID = "DED" + DateTime.Now.ToString("ddMMyyhhmmss");
+                    totalSavings = Convert.ToDecimal(lblTotalSavings.Text);
 
                     Deduction newPosting = new Deduction();
-                    string postSavingsStatus = newPosting.postSavings(conn, cmd, sqlTrans, memberID, transactionID, totalSavings, numOfRows, errorflag, selectedMonth, selectedYear);
-                    MessageBox.Show("Post Savings Status: " + postSavingsStatus);
+                    string postSavingsStatus = newPosting.postSavings(conn, cmd, sqlTrans, memberID, transactionID, lstAllSavingsDeduction, numOfRows, errorflag, selectedMonth, selectedYear);
+                    //MessageBox.Show("Post Savings Status: " + postSavingsStatus);
 
                     string postLoansStatus = newPosting.postLoans(conn, cmd, sqlTrans, memberID, transactionID, currentRecord, selectedMonth, selectedYear, numOfRows, errorflag, monthlyLoanRepayment);
-                    MessageBox.Show("PostLoan Status: " + postLoansStatus);
+                    //MessageBox.Show("PostLoan Status: " + postLoansStatus);
 
                     string recordDeductionStatus = newPosting.recordDeduction(cmd, memberID, transactionID, currentRecord, selectedMonth, selectedYear, lstAllSavingsDeduction, lstAllLoansDeduction, lstTotalDeductions, numOfRows, errorflag);
-                    MessageBox.Show("Record Deductions status: " + recordDeductionStatus);
+                    //MessageBox.Show("Record Deductions status: " + recordDeductionStatus);
 
-                    string recordDeductionDetailsStatus = newPosting.recordDeductionDetails(cmd, memberID, transactionID, currentRecord, numOfRows, errorflag, lstAllSavingsDeduction, lstAllLoansDeduction, repaymentLoanType, servicingLoan, loanMoreThanSavings);
-                    MessageBox.Show("Record Deduction Detail Status: " + recordDeductionDetailsStatus);
+                    //string recordDeductionDetailsStatus = newPosting.recordDeductionDetails(cmd, memberID, transactionID, currentRecord, numOfRows, errorflag, lstAllSavingsDeduction, lstAllLoansDeduction, repaymentLoanType, servicingLoan, loanMoreThanSavings);
+                    //MessageBox.Show("Record Deduction Detail Status: " + recordDeductionDetailsStatus);
+                    int recordDeductionDetailStatus = recordDeductionDetails(cmd,memberID,transactionID,errorflag,numOfRows);
+                    //MessageBox.Show(recordDeductionDetailStatus.ToString());
 
-
+                    
                 }
                 //end of for loop
                 #endregion end of loop
 
 
-                if (errorflag == 0)
+                if (errorflag==0)
                 {
-                    //sqlTrans.Commit();
-                    MessageBox.Show("Transaction committed");
+                    sqlTrans.Commit();
+                    MessageBox.Show("Member Deduction has been successfully posted.","Deduction Info",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                    getMonthlyDeductionsInfo(memberID);
+                    getMemberPreviousDeductions(memberID);
+                    getPreviousDeductionDate(memberID);
+
+                    
+                    //Display Savings and Loan information
+                    //lstMonthlyDeductions_SelectedIndexChanged(sender, e);
+                    string selectedMemberID = lstMonthlyDeductions.Items[0].SubItems[1].Text;
+                    getSavingsInfo(selectedMemberID);
+                    getLoansInfo(selectedMemberID);
+
+                    txtChangeSavingsAmt.Text = string.Empty;
+                    txtChangeLoanAmount.Text = string.Empty;
+
+                    ActivityLog.logActivity(UserId, "Posting Deduction - Individual", "Deduction Posting for MemberID:" + memberID + " for  Month:" + selectedMonth + " " + selectedYear);
                 }
                 else
                 {
-                    //sqlTrans.Rollback();
-                    MessageBox.Show("Transaction Failed");
+                    sqlTrans.Rollback();
+                    MessageBox.Show("Deduction Transaction failed and is aborted!","Deduction Info",MessageBoxButtons.OK,MessageBoxIcon.Error);
                 }
 
             }
@@ -530,6 +567,114 @@ namespace MainApp
 
             }
 
+        }
+
+
+        private int recordDeductionDetails(SqlCommand cmd,int memberID, string transactionID, int errorflag, int numOfRows)
+        {
+            //MessageBox.Show(lstVwSavings.Items.Count.ToString());
+            string strQuery = "Select DeductionID,TransactionID from Deductions where TransactionID=@TransactionID";
+            cmd.CommandText = strQuery;
+            #region cmd parameters
+            cmd.Parameters["@TransactionID"].Value = transactionID;
+            #endregion
+
+            SqlDataReader reader = cmd.ExecuteReader();
+            reader.Read();
+            int deductionID = (int)reader["DeductionID"];            
+            reader.Close();
+
+            //Insert Savings into DeductionsDetails
+            int savingDeductionDetailStatus = SavingsDeductionDetails(cmd, transactionID, ref errorflag, ref numOfRows, ref strQuery, deductionID);
+
+            //Insert Loans into DeductionsDetails
+            int loanDeductionDetailStatus = LoansDeductionDetails(cmd, transactionID, ref errorflag, ref numOfRows, deductionID);
+
+
+            
+            return numOfRows; 
+        }
+
+
+        private int LoansDeductionDetails(SqlCommand cmd, string transactionID, ref int errorflag, ref int numOfRows, int deductionID)
+        {
+
+            string strQuery = "Insert into DeductionDetails(DeductionID,DeductionType,SavingsTypeID,Amount,Remarks,TransactionID)Values" +
+               "(@DeductionID,@DeductionType,@SavingsTypeID,@Amount,@Remarks,@TransactionID)";
+
+            cmd.CommandText = strQuery;
+            
+            string deductionType = string.Empty;
+            decimal deductionAmount = 0;
+            string loanTypeID = string.Empty;
+
+            if (lstVwLoans.Items.Count != 0)
+            {
+                for (int i = 0; i < lstVwLoans.Items.Count; i++)
+                {
+                    deductionType = lstVwLoans.Items[i].SubItems[4].Text;
+                    deductionAmount = Convert.ToDecimal(lstMonthlyDeductions.Items[i].SubItems[5].Text);
+                    loanTypeID = lstVwLoans.Items[i].SubItems[5].Text;
+
+                    #region cmd parameters
+                    cmd.Parameters["@DeductionID"].Value = deductionID;
+                    cmd.Parameters["@DeductionType"].Value = deductionType;
+                    cmd.Parameters["@SavingsTypeID"].Value = loanTypeID;
+                    cmd.Parameters["@Amount"].Value = deductionAmount;
+                    cmd.Parameters["@Remarks"].Value = string.Empty;
+                    cmd.Parameters["@TransactionID"].Value = transactionID;
+                    #endregion cmd parameters
+                    numOfRows = cmd.ExecuteNonQuery();
+                    if (numOfRows == 0) { errorflag = 1; }
+
+                }
+
+            }
+
+            return numOfRows;
+        }
+
+        private int SavingsDeductionDetails(SqlCommand cmd, string transactionID, ref int errorflag, ref int numOfRows, ref string strQuery, int deductionID)
+        {
+            strQuery = "Insert into DeductionDetails(DeductionID,DeductionType,SavingsTypeID,Amount,Remarks,TransactionID)Values" +
+               "(@DeductionID,@DeductionType,@SavingsTypeID,@Amount,@Remarks,@TransactionID)";
+
+            cmd.CommandText = strQuery;
+            cmd.Parameters.Add("@DeductionID", SqlDbType.Int);
+            cmd.Parameters.Add("@DeductionType", SqlDbType.NVarChar, 50);
+            cmd.Parameters.Add("@SavingsTypeID", SqlDbType.NVarChar, 10);
+            //cmd.Parameters.Add("@Amount", SqlDbType.Decimal);
+            cmd.Parameters.Add("@Remarks", SqlDbType.NVarChar, 400);
+            //cmd.Parameters.Add("@TransactionID", SqlDbType.NVarChar, 50);
+
+            string deductionType = string.Empty;
+            decimal deductionAmount = 0;
+            string savingTypeID = string.Empty;
+
+            if (lstVwSavings.Items.Count != 0)
+            {
+                for (int i = 0; i < lstVwSavings.Items.Count; i++)
+                {
+                    //lstVwSavings.Items[i].SubItems[0].Text + " - " + lstVwSavings.Items[i].SubItems[1].Text);
+                    deductionType = lstVwSavings.Items[i].SubItems[1].Text;
+                    deductionAmount = Convert.ToDecimal(lstVwSavings.Items[i].SubItems[2].Text);
+                    savingTypeID = lstVwSavings.Items[i].SubItems[0].Text;
+
+
+                    #region cmd parameters
+                    cmd.Parameters["@DeductionID"].Value = deductionID;
+                    cmd.Parameters["@DeductionType"].Value = deductionType;
+                    cmd.Parameters["@SavingsTypeID"].Value = savingTypeID;
+                    cmd.Parameters["@Amount"].Value = deductionAmount;
+                    cmd.Parameters["@Remarks"].Value = string.Empty;
+                    cmd.Parameters["@TransactionID"].Value = transactionID;
+                    #endregion cmd parameters
+                    numOfRows = cmd.ExecuteNonQuery();
+                    if (numOfRows == 0) { errorflag = 1; }
+                }
+            }
+
+            return numOfRows;
         }
 
         private void lstMonthlyDeductions_SelectedIndexChanged(object sender, EventArgs e)
@@ -547,7 +692,7 @@ namespace MainApp
             decimal calTotalSavings = 0;
 
             SqlConnection conn = ConnectDB.GetConnection();
-            string sqlQuery = "Select Remark,Amount from MemberSavingsTypeAcct where MemberID=@MemberID";
+            string sqlQuery = "Select SavingsTypeID,Remark,Amount from MemberSavingsTypeAcct where MemberID=@MemberID";
             SqlCommand cmd = new SqlCommand(sqlQuery, conn);
 
             cmd.Parameters.Add("@MemberID", SqlDbType.NVarChar, 20);
@@ -564,7 +709,7 @@ namespace MainApp
                     while (reader.Read())
                     {
                         calTotalSavings += Convert.ToDecimal(reader["Amount"]);
-                        string[] row = { reader["Remark"].ToString(), CheckForNumber.formatCurrency2(reader["Amount"].ToString()) };
+                        string[] row = { reader["SavingsTypeID"].ToString(), reader["Remark"].ToString(), CheckForNumber.formatCurrency2(reader["Amount"].ToString()) };
                         ListViewItem item = new ListViewItem(row);
                         lstVwSavings.Items.Add(item);
                     }
@@ -584,14 +729,16 @@ namespace MainApp
 
         private void getLoansInfo(string memberID)
         {
-            decimal loanMonthlyPayment = 0;
+            //decimal loanMonthlyPayment = 0;
             //get loan amount
             decimal serviceLoanAmount = Convert.ToDecimal(lstMonthlyDeductions.Items[0].SubItems[5].Text);
             if (serviceLoanAmount > 0)
             {
                 SqlConnection conn = ConnectDB.GetConnection();
-                string sqlQuery = "Select a.MonthlyRepayment,l.RepaymentAmount,l.AmountPaid,l.OutstandingAmount from LoanApplication a " +
-                "inner join Loans l on a.LoanApplicationID = l.LoanApplicationID where a.MemberID=@MemberID and l.OutstandingAmount<>0";
+                string sqlQuery = "Select a.MonthlyRepayment,l.RepaymentAmount,l.AmountPaid,l.OutstandingAmount, lt.Type, lt.LoanTypeID from LoanApplication a " +
+                "inner join Loans l on a.LoanApplicationID = l.LoanApplicationID " +
+                "inner join LoanType lt on a.LoanTypeID=lt.LoanTypeID " +
+                "where a.MemberID=@MemberID and l.OutstandingAmount<>0";
 
                 SqlCommand cmd = new SqlCommand(sqlQuery, conn);
 
@@ -609,7 +756,7 @@ namespace MainApp
                     {
                          reader.Read();
                         
-                            string[] row = {CheckForNumber.formatCurrency2(reader["MonthlyRepayment"].ToString()),CheckForNumber.formatCurrency2(reader["RepaymentAmount"].ToString()),CheckForNumber.formatCurrency2(reader["AmountPaid"].ToString()),CheckForNumber.formatCurrency2(reader["OutstandingAmount"].ToString())};
+                            string[] row = {CheckForNumber.formatCurrency2(reader["MonthlyRepayment"].ToString()),CheckForNumber.formatCurrency2(reader["RepaymentAmount"].ToString()),CheckForNumber.formatCurrency2(reader["AmountPaid"].ToString()),CheckForNumber.formatCurrency2(reader["OutstandingAmount"].ToString()),reader["Type"].ToString(), reader["LoanTypeID"].ToString()};
                             ListViewItem item = new ListViewItem(row);
                             lstVwLoans.Items.Add(item);
                         
@@ -632,7 +779,7 @@ namespace MainApp
         {
             if (lstVwSavings.SelectedItems.Count != 0)
             {
-                txtChangeSavingsAmt.Text = lstVwSavings.SelectedItems[0].SubItems[1].Text;
+                txtChangeSavingsAmt.Text = lstVwSavings.SelectedItems[0].SubItems[2].Text;
                 txtChangeSavingsAmt.Enabled = true;
             }
         }
@@ -650,22 +797,29 @@ namespace MainApp
             decimal new_SavingsAmount;
             decimal totalSavingsRecalculated = 0;
 
-            int lstCountItem = lstVwSavings.Items.Count;
-
-            if (Decimal.TryParse(txtChangeSavingsAmt.Text,out new_SavingsAmount))
+            if (lstVwSavings.SelectedItems.Count > 0   && txtChangeSavingsAmt.Text != string.Empty)
             {
-                lstVwSavings.SelectedItems[0].SubItems[1].Text = CheckForNumber.formatCurrency2(txtChangeSavingsAmt.Text);
+                int lstCountItem = lstVwSavings.Items.Count;
 
-                for (int i = 0; i < lstCountItem; i++)
+                if (Decimal.TryParse(txtChangeSavingsAmt.Text, out new_SavingsAmount))
                 {
-                    totalSavingsRecalculated += Convert.ToDecimal(lstVwSavings.Items[i].SubItems[1].Text);
-                }
+                    lstVwSavings.SelectedItems[0].SubItems[2].Text = CheckForNumber.formatCurrency2(txtChangeSavingsAmt.Text);
 
-                lblTotalSavings.Text = CheckForNumber.formatCurrency2(totalSavingsRecalculated.ToString());
+                    for (int i = 0; i < lstCountItem; i++)
+                    {
+                        totalSavingsRecalculated += Convert.ToDecimal(lstVwSavings.Items[i].SubItems[2].Text);
+                    }
+
+                    lblTotalSavings.Text = CheckForNumber.formatCurrency2(totalSavingsRecalculated.ToString());
+                }
+                else
+                {
+                    MessageBox.Show("The Amount entered is invalid", "Deduction Info", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else
             {
-                MessageBox.Show("The Amount entered is invalid", "Deduction Info", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Select an a Savings Type and Supply an Amount", "Deduction Info", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
         }
 
@@ -683,34 +837,99 @@ namespace MainApp
         private void btnChangeLoanAmt_Click(object sender, EventArgs e)
         {
             decimal new_LoansAmt;
+            decimal new_totalAmt;
 
-            if (decimal.TryParse(txtChangeLoanAmount.Text, out new_LoansAmt))
+            if (lstVwLoans.SelectedItems.Count > 0 && txtChangeLoanAmount.Text != string.Empty)
             {
-                if (Convert.ToDecimal(txtChangeLoanAmount.Text) > 0)
+                if (decimal.TryParse(txtChangeLoanAmount.Text, out new_LoansAmt))
                 {
+                    if (Convert.ToDecimal(txtChangeLoanAmount.Text) > 0)
+                    {
 
+                        lstMonthlyDeductions.Items[0].SubItems[5].Text = CheckForNumber.formatCurrency2(txtChangeLoanAmount.Text);
+
+                        new_totalAmt = Convert.ToDecimal(lstMonthlyDeductions.Items[0].SubItems[4].Text) + Convert.ToDecimal(lstMonthlyDeductions.Items[0].SubItems[5].Text);
+                        lstMonthlyDeductions.Items[0].SubItems[6].Text = CheckForNumber.formatCurrency2(new_totalAmt.ToString());
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("The Amount entered is invalid", "Deduction Info", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {
+
                     MessageBox.Show("The Amount entered is invalid", "Deduction Info", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                 }
             }
             else
             {
-                
-                MessageBox.Show("The Amount entered is invalid", "Deduction Info", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            
+                MessageBox.Show("Select a Loan and Supply a new Loan Amount", "Deduction Info", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
         }
 
         private void btnApplyChanges_Click(object sender, EventArgs e)
         {
-            lstMonthlyDeductions.Items[0].SubItems[4].Text = lblTotalSavings.Text;
-            lstMonthlyDeductions.Items[0].SubItems[5].Text = lblTotalLoans.Text;
+            decimal new_LoansAmt = 0;
+            //decimal new_totalAmt;
 
-            lstMonthlyDeductions.Items[0].SubItems[6].Text = CheckForNumber.formatCurrency2(Convert.ToString(Convert.ToDecimal(lblTotalSavings.Text) + Convert.ToDecimal(lblTotalLoans.Text)));
+            lstMonthlyDeductions.Items[0].SubItems[4].Text = lblTotalSavings.Text;
+            if (txtChangeLoanAmount.Text == string.Empty)
+            {
+
+                lstMonthlyDeductions.Items[0].SubItems[5].Text = lblTotalLoans.Text;
+                new_LoansAmt = Convert.ToDecimal(lblTotalLoans.Text);
+            }
+            else
+            {
+                
+
+                if (decimal.TryParse(txtChangeLoanAmount.Text, out new_LoansAmt))
+                {
+                    if (Convert.ToDecimal(txtChangeLoanAmount.Text) > 0)
+                    {
+
+                        lstMonthlyDeductions.Items[0].SubItems[5].Text = CheckForNumber.formatCurrency2(txtChangeLoanAmount.Text);
+                        new_LoansAmt = Convert.ToDecimal(txtChangeLoanAmount.Text);
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("The new Loan Amount entered is invalid", "Deduction Info", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        lstMonthlyDeductions.Items[0].SubItems[5].Text = lblTotalLoans.Text;
+                        new_LoansAmt = Convert.ToDecimal(lblTotalLoans.Text);
+                    }
+
+                }
+            }
+
+                        lstMonthlyDeductions.Items[0].SubItems[6].Text = CheckForNumber.formatCurrency2(Convert.ToString(Convert.ToDecimal(lblTotalSavings.Text) + new_LoansAmt));
         }
 
+        private void PostDeduction_Individual_Load(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void txtChangeSavingsAmt_Leave(object sender, EventArgs e)
+        {
+            if (!FieldValidator.isBlank(txtChangeSavingsAmt.Text) && CheckForNumber.isNumeric(txtChangeSavingsAmt.Text))
+            {
+                txtChangeSavingsAmt.Text = CheckForNumber.formatCurrency2(txtChangeSavingsAmt.Text);
+            }
+        }
+
+        private void txtChangeLoanAmount_Leave(object sender, EventArgs e)
+        {
+            if (!FieldValidator.isBlank(txtChangeLoanAmount.Text) && CheckForNumber.isNumeric(txtChangeLoanAmount.Text))
+            {
+                txtChangeLoanAmount.Text = CheckForNumber.formatCurrency2(txtChangeLoanAmount.Text);
+            }
+        }
+
+        
         
     
     

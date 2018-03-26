@@ -15,6 +15,7 @@ namespace MainApp
     {
         string strFilterMonth = string.Empty;
         string strFilterYear = string.Empty;
+        DataTable dt;
 
         public DeleteLoanApplication()
         {
@@ -24,6 +25,7 @@ namespace MainApp
         private void DeleteLoanApplication_Load(object sender, EventArgs e)
         {
             loadAllLoanApplicationRecords(strFilterMonth,strFilterYear);
+                        
         }
 
         private void loadAllLoanApplicationRecords(string strFilterMonth, string strFilterYear)
@@ -46,7 +48,7 @@ namespace MainApp
                 strWhereClause = "where a.AppMonth like '" + strFilterMonth + "' and a.AppYear like '" + strFilterYear + "'";
             }
 
-            MessageBox.Show(strWhereClause.ToString());
+            //MessageBox.Show(strWhereClause.ToString());
             
 
             SqlConnection conn = ConnectDB.GetConnection();
@@ -58,7 +60,7 @@ namespace MainApp
             "s3.LastName + ' ' + s3.FirstName + ' ' + s3.MiddleName as Witness, " +
             "a.NonMemberSurety1 as 'Non-Member Surety1', a.NonMemberSurety2 as 'Non-Member Surety2', " +
             "a.NonMemberWitness as 'Non-Member Witness', " +
-            "a.ApprovalStatus 'Approval Status', a.TransactionID, a.DatePosted " +
+            "a.ApprovalStatus 'Approval Status', a.TransactionID, a.DatePosted 'Date Posted' " +
             "from LoanApplication a left join Members m on a.MemberID = m.MemberID " +
             "left join MonthByName c on a.AppMonth= c.MonthID " +
             "left join MonthByName sr on a.StartRepaymentMonth = sr.MonthID " +
@@ -69,6 +71,8 @@ namespace MainApp
             "left join Members s3 on s3.MemberID=a.WitnessMemberID " + strWhereClause +            
             "order by a.LoanApplicationID desc";
 
+            string strTotalFilteredRecords = "Select count(*) from LoanApplication a " + strWhereClause;
+
             SqlCommand cmd = new SqlCommand(strQuery, conn);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
@@ -77,7 +81,7 @@ namespace MainApp
             {
                 conn.Open();
                 da.Fill(ds, "LoanApplications");
-                DataTable dt = ds.Tables["LoanApplications"];
+                dt = ds.Tables["LoanApplications"];
 
                 datGrdVwLoansApp.DataSource = dt;
 
@@ -94,7 +98,9 @@ namespace MainApp
                 datGrdVwLoansApp.Columns["Interest Amount"].DefaultCellStyle.Format = "N2";
                 datGrdVwLoansApp.Columns["Total Repayment"].DefaultCellStyle.Format = "N2";
 
-
+                cmd = new SqlCommand(strTotalFilteredRecords, conn);
+                int recordCount = Convert.ToInt32(cmd.ExecuteScalar());
+                lblRecordNo.Text = "No. of Records: " + recordCount.ToString();
             }
             catch (Exception ex)
             {
@@ -114,7 +120,7 @@ namespace MainApp
                 //MessageBox.Show(cboMonth.SelectedIndex.ToString());
                 strFilterMonth = cboMonth.SelectedIndex.ToString();
                 strFilterYear = cboYear.Text.ToString();
-                MessageBox.Show(cboYear.Text.ToString());
+                //MessageBox.Show(cboYear.Text.ToString());
 
                 loadAllLoanApplicationRecords(strFilterMonth, strFilterYear);
             }
@@ -123,6 +129,77 @@ namespace MainApp
                 MessageBox.Show("Please Select Month and Year to Proceed with Search", "Find Loan Application", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (datGrdVwLoansApp.SelectedCells.Count > 0)
+            {
+                int selectedRowIndex = datGrdVwLoansApp.SelectedCells[0].RowIndex;
+                DataGridViewRow selectedRow = datGrdVwLoansApp.Rows[selectedRowIndex];
+                string applicationID = Convert.ToString(selectedRow.Cells["ID"].Value);
+                string applicationStatus = Convert.ToString(selectedRow.Cells["Approval Status"].Value);
+
+                //MessageBox.Show(applicationID + ' ' + applicationStatus);
+                if (applicationStatus == string.Empty)
+                {
+                    DialogResult res = MessageBox.Show("Do you really wish to delete the Selected Record?","Loan Application",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+                    if (res == DialogResult.Yes)
+                    {
+                        DeleteSelectedAppRecord(applicationID);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Selected Loan Application Record cannot be Deleted as it has been Treated and Archived", "Loan Application", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else
+            {
+
+            }
+        }
         
+        private void DeleteSelectedAppRecord(string applicationID)
+        {
+            SqlConnection conn = ConnectDB.GetConnection();
+            string strDelete = "Delete from LoanApplication where LoanApplicationID=" + applicationID;
+            SqlCommand cmd = new SqlCommand(strDelete, conn);
+
+            try
+            {
+                conn.Open();
+                int rowAffected = cmd.ExecuteNonQuery();
+                if (rowAffected > 0)
+                {
+                    //MessageBox.Show("The Selected Record has been Deleted", "Loan Application", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    strFilterMonth = string.Empty;
+                    strFilterYear = string.Empty;
+                    loadAllLoanApplicationRecords(strFilterMonth,strFilterYear);
+                    string userId = this.MdiParent.Controls["lblLoggedInUserID"].Text;
+                    ActivityLog.logActivity(userId, "Delete Loan Application", "Loan Application with ID - " + applicationID + " was deleted.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            ExportData exportSavingsDetails = new ExportData();
+            exportSavingsDetails.ExportToExcel(dt, saveFD);
+        }
+
+        private void btnReload_Click(object sender, EventArgs e)
+        {
+            strFilterMonth = string.Empty;
+            strFilterYear = string.Empty;
+            loadAllLoanApplicationRecords(strFilterMonth, strFilterYear);
+        }
     }
 }

@@ -62,10 +62,16 @@
     <ManifestKeyFile>MainApp_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <GenerateManifests>true</GenerateManifests>
+    <GenerateManifests>false</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
@@ -88,20 +94,64 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActivityLog.cs" />
-    <Compile Include="Banks.cs" />
-    <Compile Include="BuildTempSavingsAcctType.cs" />
-    <Compile Include="CheckForNumber.cs" />
-    <Compile Include="CreateLoanCategory.cs">
+    <Compile Include="Classes\ActivityLog.cs" />
+    <Compile Include="Classes\Banks.cs" />
+    <Compile Include="Classes\BuildTempSavingsAcctType.cs" />
+    <Compile Include="Classes\CheckForNumber.cs" />
+    <Compile Include="Classes\Cl_UnpostDeductions.cs" />
+    <Compile Include="Classes\SavingsByAcctType.cs" />
+    <Compile Include="Deductions\ViewDeductionDetails.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CreateLoanCategory.Designer.cs">
+    <Compile Include="Deductions\ViewDeductionDetails.Designer.cs">
+      <DependentUpon>ViewDeductionDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmRprtMemberSavings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmRprtMemberSavings.Designer.cs">
+      <DependentUpon>FrmRprtMemberSavings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Loans\DeleteLoanBroughtForward.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Loans\DeleteLoanBroughtForward.Designer.cs">
+      <DependentUpon>DeleteLoanBroughtForward.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Loans\EditLoansBroughtForward.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Loans\EditLoansBroughtForward.Designer.cs">
+      <DependentUpon>EditLoansBroughtForward.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Loans\NewLoanBroughtForward.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Loans\NewLoanBroughtForward.Designer.cs">
+      <DependentUpon>NewLoanBroughtForward.cs</DependentUpon>
+    </Compile>
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="obj\Release\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Release\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Release\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="RprtMemberSavings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RprtMemberSavings.Designer.cs">
+      <DependentUpon>RprtMemberSavings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\CreateLoanCategory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Settings\CreateLoanCategory.Designer.cs">
       <DependentUpon>CreateLoanCategory.cs</DependentUpon>
     </Compile>
-    <Compile Include="CreateLoanType.cs">
+    <Compile Include="Settings\CreateLoanType.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CreateLoanType.Designer.cs">
+    <Compile Include="Settings\CreateLoanType.Designer.cs">
       <DependentUpon>CreateLoanType.cs</DependentUpon>
     </Compile>
     <Compile Include="DatasetMembers.Designer.cs">
@@ -109,22 +159,22 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DatasetMembers.xsd</DependentUpon>
     </Compile>
-    <Compile Include="DateFunction.cs" />
-    <Compile Include="Deduction.cs" />
+    <Compile Include="Classes\DateFunction.cs" />
+    <Compile Include="Classes\Deduction.cs" />
     <Compile Include="Loans\DeleteLoanApplication.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Loans\DeleteLoanApplication.Designer.cs">
       <DependentUpon>DeleteLoanApplication.cs</DependentUpon>
     </Compile>
-    <Compile Include="PhotoPath.cs" />
+    <Compile Include="Classes\PhotoPath.cs" />
     <Compile Include="Savings\DeleteSavingsForward.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Savings\DeleteSavingsForward.Designer.cs">
       <DependentUpon>DeleteSavingsForward.cs</DependentUpon>
     </Compile>
-    <Compile Include="Departments.cs" />
+    <Compile Include="Classes\Departments.cs" />
     <Compile Include="Contributions\EditContributions.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -137,23 +187,23 @@
     <Compile Include="Savings\EditSavingsForward.Designer.cs">
       <DependentUpon>EditSavingsForward.cs</DependentUpon>
     </Compile>
-    <Compile Include="ExportData.cs" />
-    <Compile Include="FrmGenerateMemberProfileByFileNo.cs">
+    <Compile Include="Classes\ExportData.cs" />
+    <Compile Include="ReportForms\FrmGenerateMemberProfileByFileNo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmGenerateMemberProfileByFileNo.Designer.cs">
+    <Compile Include="ReportForms\FrmGenerateMemberProfileByFileNo.Designer.cs">
       <DependentUpon>FrmGenerateMemberProfileByFileNo.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmReportMemberProfile.cs">
+    <Compile Include="ReportsUI\FrmReportMemberProfile.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmReportMemberProfile.Designer.cs">
+    <Compile Include="ReportsUI\FrmReportMemberProfile.Designer.cs">
       <DependentUpon>FrmReportMemberProfile.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmReportMembers.cs">
+    <Compile Include="ReportsUI\FrmReportMembers.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmReportMembers.Designer.cs">
+    <Compile Include="ReportsUI\FrmReportMembers.Designer.cs">
       <DependentUpon>FrmReportMembers.cs</DependentUpon>
     </Compile>
     <Compile Include="Loans\LoanApplication.cs">
@@ -216,7 +266,7 @@
     <Compile Include="Savings\EditMemberSavings.Designer.cs">
       <DependentUpon>EditMemberSavings.cs</DependentUpon>
     </Compile>
-    <Compile Include="FieldValidator.cs" />
+    <Compile Include="Classes\FieldValidator.cs" />
     <Compile Include="Members\FindMember.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -299,7 +349,7 @@
     <Compile Include="Members\AddMember.Designer.cs">
       <DependentUpon>AddMember.cs</DependentUpon>
     </Compile>
-    <Compile Include="ConnectDB.cs" />
+    <Compile Include="Classes\ConnectDB.cs" />
     <Compile Include="FUNAAB_CTCS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -348,10 +398,10 @@
     <Compile Include="Savings\ViewSavings.Designer.cs">
       <DependentUpon>ViewSavings.cs</DependentUpon>
     </Compile>
-    <Compile Include="ShowActivityLog.cs">
+    <Compile Include="Settings\ShowActivityLog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ShowActivityLog.Designer.cs">
+    <Compile Include="Settings\ShowActivityLog.Designer.cs">
       <DependentUpon>ShowActivityLog.cs</DependentUpon>
     </Compile>
     <Compile Include="Deductions\ViewDeductions.cs">
@@ -360,13 +410,107 @@
     <Compile Include="Deductions\ViewDeductions.Designer.cs">
       <DependentUpon>ViewDeductions.cs</DependentUpon>
     </Compile>
+    <Compile Include="Savings\ViewSavingsDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Savings\ViewSavingsDetails.Designer.cs">
+      <DependentUpon>ViewSavingsDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Loans\ViewLoanApplication.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Loans\ViewLoanApplication.Designer.cs">
+      <DependentUpon>ViewLoanApplication.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Loans\ViewLoanDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Loans\ViewLoanDetails.Designer.cs">
+      <DependentUpon>ViewLoanDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Deductions\UnpostDeductions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Deductions\UnpostDeductions.Designer.cs">
+      <DependentUpon>UnpostDeductions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Withdrawal\DeleteWithdrawal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Withdrawal\DeleteWithdrawal.Designer.cs">
+      <DependentUpon>DeleteWithdrawal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Withdrawal\MakeWithdrawal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Withdrawal\MakeWithdrawal.Designer.cs">
+      <DependentUpon>MakeWithdrawal.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Contributions\EditContributions.resx">
       <DependentUpon>EditContributions.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CreateLoanCategory.resx">
+    <EmbeddedResource Include="Deductions\ViewDeductionDetails.resx">
+      <DependentUpon>ViewDeductionDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmRprtMemberSavings.resx">
+      <DependentUpon>FrmRprtMemberSavings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Loans\DeleteLoanBroughtForward.resx">
+      <DependentUpon>DeleteLoanBroughtForward.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Loans\EditLoansBroughtForward.resx">
+      <DependentUpon>EditLoansBroughtForward.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Loans\NewLoanBroughtForward.resx">
+      <DependentUpon>NewLoanBroughtForward.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="obj\Release\MainApp.AddBank.resources" />
+    <EmbeddedResource Include="obj\Release\MainApp.AddDepartment.resources" />
+    <EmbeddedResource Include="obj\Release\MainApp.AddMember.resources" />
+    <EmbeddedResource Include="obj\Release\MainApp.CreateLoanCategory.resources" />
+    <EmbeddedResource Include="obj\Release\MainApp.CreateLoanType.resources" />
+    <EmbeddedResource Include="obj\Release\MainApp.CreateSavingsType.resources" />
+    <EmbeddedResource Include="obj\Release\MainApp.DeleteBank.resources" />
+    <EmbeddedResource Include="obj\Release\MainApp.DeleteDepartment.resources" />
+    <EmbeddedResource Include="obj\Release\MainApp.EditBank.resources" />
+    <EmbeddedResource Include="obj\Release\MainApp.EditContributions.resources" />
+    <EmbeddedResource Include="obj\Release\MainApp.EditDepartment.resources" />
+    <EmbeddedResource Include="obj\Release\MainApp.EditMember.resources" />
+    <EmbeddedResource Include="obj\Release\MainApp.EditMemberSavings.resources" />
+    <EmbeddedResource Include="obj\Release\MainApp.EditSavingsForward.resources" />
+    <EmbeddedResource Include="obj\Release\MainApp.EditSavingsType.resources" />
+    <EmbeddedResource Include="obj\Release\MainApp.FindMember.resources" />
+    <EmbeddedResource Include="obj\Release\MainApp.FrmGenerateMemberProfileByFileNo.resources" />
+    <EmbeddedResource Include="obj\Release\MainApp.FrmReportMemberProfile.resources" />
+    <EmbeddedResource Include="obj\Release\MainApp.FrmReportMembers.resources" />
+    <EmbeddedResource Include="obj\Release\MainApp.LoanApplication.resources" />
+    <EmbeddedResource Include="obj\Release\MainApp.LoanApplicationApproval.resources" />
+    <EmbeddedResource Include="obj\Release\MainApp.Login.resources" />
+    <EmbeddedResource Include="obj\Release\MainApp.MainApp.resources" />
+    <EmbeddedResource Include="obj\Release\MainApp.MakeContributions.resources" />
+    <EmbeddedResource Include="obj\Release\MainApp.MemberProfile.resources" />
+    <EmbeddedResource Include="obj\Release\MainApp.MembershipWithdrawal.resources" />
+    <EmbeddedResource Include="obj\Release\MainApp.MembersList.resources" />
+    <EmbeddedResource Include="obj\Release\MainApp.PostDeductions.resources" />
+    <EmbeddedResource Include="obj\Release\MainApp.PostDeduction_Individual.resources" />
+    <EmbeddedResource Include="obj\Release\MainApp.PostLoanRepayment.resources" />
+    <EmbeddedResource Include="obj\Release\MainApp.Properties.Resources.resources" />
+    <EmbeddedResource Include="obj\Release\MainApp.SavingsForward.resources" />
+    <EmbeddedResource Include="obj\Release\MainApp.SetUpMemberSavingsAccount.resources" />
+    <EmbeddedResource Include="obj\Release\MainApp.ShowActivityLog.resources" />
+    <EmbeddedResource Include="obj\Release\MainApp.ViewBanks.resources" />
+    <EmbeddedResource Include="obj\Release\MainApp.ViewContributions.resources" />
+    <EmbeddedResource Include="obj\Release\MainApp.ViewDeductions.resources" />
+    <EmbeddedResource Include="obj\Release\MainApp.ViewDepartments.resources" />
+    <EmbeddedResource Include="obj\Release\MainApp.ViewSavings.resources" />
+    <EmbeddedResource Include="ReportMemberSavings.rdlc" />
+    <EmbeddedResource Include="RprtMemberSavings.resx">
+      <DependentUpon>RprtMemberSavings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Settings\CreateLoanCategory.resx">
       <DependentUpon>CreateLoanCategory.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CreateLoanType.resx">
+    <EmbeddedResource Include="Settings\CreateLoanType.resx">
       <DependentUpon>CreateLoanType.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Loans\DeleteLoanApplication.resx">
@@ -378,13 +522,13 @@
     <EmbeddedResource Include="Savings\EditSavingsForward.resx">
       <DependentUpon>EditSavingsForward.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmGenerateMemberProfileByFileNo.resx">
+    <EmbeddedResource Include="ReportForms\FrmGenerateMemberProfileByFileNo.resx">
       <DependentUpon>FrmGenerateMemberProfileByFileNo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmReportMemberProfile.resx">
+    <EmbeddedResource Include="ReportsUI\FrmReportMemberProfile.resx">
       <DependentUpon>FrmReportMemberProfile.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmReportMembers.resx">
+    <EmbeddedResource Include="ReportsUI\FrmReportMembers.resx">
       <DependentUpon>FrmReportMembers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Loans\LoanApplication.resx">
@@ -411,8 +555,8 @@
     <EmbeddedResource Include="Deductions\PostDeduction_Individual.resx">
       <DependentUpon>PostDeduction_Individual.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ReportMemberProfile.rdlc" />
-    <EmbeddedResource Include="ReportMembers.rdlc" />
+    <EmbeddedResource Include="Reports\ReportMemberProfile.rdlc" />
+    <EmbeddedResource Include="Reports\ReportMembers.rdlc" />
     <EmbeddedResource Include="Savings\SavingsForward.resx">
       <DependentUpon>SavingsForward.cs</DependentUpon>
     </EmbeddedResource>
@@ -481,12 +625,72 @@
     <EmbeddedResource Include="Savings\ViewSavings.resx">
       <DependentUpon>ViewSavings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ShowActivityLog.resx">
+    <EmbeddedResource Include="Settings\ShowActivityLog.resx">
       <DependentUpon>ShowActivityLog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Deductions\ViewDeductions.resx">
       <DependentUpon>ViewDeductions.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Savings\ViewSavingsDetails.resx">
+      <DependentUpon>ViewSavingsDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Loans\ViewLoanApplication.resx">
+      <DependentUpon>ViewLoanApplication.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Loans\ViewLoanDetails.resx">
+      <DependentUpon>ViewLoanDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Deductions\UnpostDeductions.resx">
+      <DependentUpon>UnpostDeductions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Withdrawal\DeleteWithdrawal.resx">
+      <DependentUpon>DeleteWithdrawal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Withdrawal\MakeWithdrawal.resx">
+      <DependentUpon>MakeWithdrawal.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="bin\Debug\MainApp - Shortcut.lnk" />
+    <None Include="bin\Debug\MainApp.application" />
+    <None Include="bin\Debug\MainApp.exe.config" />
+    <None Include="bin\Debug\MainApp.exe.manifest" />
+    <None Include="bin\Debug\MainApp.vshost.application" />
+    <None Include="bin\Debug\MainApp.vshost.exe.config" />
+    <None Include="bin\Debug\MainApp.vshost.exe.manifest" />
+    <None Include="bin\Release\app.publish\Application Files\MainApp_1_0_0_7\de\Microsoft.ReportViewer.WinForms.resources.dll.deploy" />
+    <None Include="bin\Release\app.publish\Application Files\MainApp_1_0_0_7\es\Microsoft.ReportViewer.WinForms.resources.dll.deploy" />
+    <None Include="bin\Release\app.publish\Application Files\MainApp_1_0_0_7\fr\Microsoft.ReportViewer.WinForms.resources.dll.deploy" />
+    <None Include="bin\Release\app.publish\Application Files\MainApp_1_0_0_7\icons\accounting.jpg.deploy" />
+    <None Include="bin\Release\app.publish\Application Files\MainApp_1_0_0_7\icons\add.png.deploy" />
+    <None Include="bin\Release\app.publish\Application Files\MainApp_1_0_0_7\icons\add_icon.png.deploy" />
+    <None Include="bin\Release\app.publish\Application Files\MainApp_1_0_0_7\icons\add_member.gif.deploy" />
+    <None Include="bin\Release\app.publish\Application Files\MainApp_1_0_0_7\icons\add_member.png.deploy" />
+    <None Include="bin\Release\app.publish\Application Files\MainApp_1_0_0_7\icons\cancel.png.deploy" />
+    <None Include="bin\Release\app.publish\Application Files\MainApp_1_0_0_7\icons\cancelPicture.png.deploy" />
+    <None Include="bin\Release\app.publish\Application Files\MainApp_1_0_0_7\icons\edit_member.png.deploy" />
+    <None Include="bin\Release\app.publish\Application Files\MainApp_1_0_0_7\icons\edit_savings.png.deploy" />
+    <None Include="bin\Release\app.publish\Application Files\MainApp_1_0_0_7\icons\find_icon.png.deploy" />
+    <None Include="bin\Release\app.publish\Application Files\MainApp_1_0_0_7\icons\loadpicture.png.deploy" />
+    <None Include="bin\Release\app.publish\Application Files\MainApp_1_0_0_7\icons\members.gif.deploy" />
+    <None Include="bin\Release\app.publish\Application Files\MainApp_1_0_0_7\icons\minus.png.deploy" />
+    <None Include="bin\Release\app.publish\Application Files\MainApp_1_0_0_7\icons\profile_img.png.deploy" />
+    <None Include="bin\Release\app.publish\Application Files\MainApp_1_0_0_7\icons\save.png.deploy" />
+    <None Include="bin\Release\app.publish\Application Files\MainApp_1_0_0_7\icons\savings.png.deploy" />
+    <None Include="bin\Release\app.publish\Application Files\MainApp_1_0_0_7\icons\search_member2.png.deploy" />
+    <None Include="bin\Release\app.publish\Application Files\MainApp_1_0_0_7\it\Microsoft.ReportViewer.WinForms.resources.dll.deploy" />
+    <None Include="bin\Release\app.publish\Application Files\MainApp_1_0_0_7\ja\Microsoft.ReportViewer.WinForms.resources.dll.deploy" />
+    <None Include="bin\Release\app.publish\Application Files\MainApp_1_0_0_7\ko\Microsoft.ReportViewer.WinForms.resources.dll.deploy" />
+    <None Include="bin\Release\app.publish\Application Files\MainApp_1_0_0_7\MainApp.exe.config.deploy" />
+    <None Include="bin\Release\app.publish\Application Files\MainApp_1_0_0_7\MainApp.exe.deploy" />
+    <None Include="bin\Release\app.publish\Application Files\MainApp_1_0_0_7\MainApp.exe.manifest" />
+    <None Include="bin\Release\app.publish\Application Files\MainApp_1_0_0_7\photos\profile_img.png.deploy" />
+    <None Include="bin\Release\app.publish\Application Files\MainApp_1_0_0_7\pt\Microsoft.ReportViewer.WinForms.resources.dll.deploy" />
+    <None Include="bin\Release\app.publish\Application Files\MainApp_1_0_0_7\ru\Microsoft.ReportViewer.WinForms.resources.dll.deploy" />
+    <None Include="bin\Release\app.publish\Application Files\MainApp_1_0_0_7\zh-CHS\Microsoft.ReportViewer.WinForms.resources.dll.deploy" />
+    <None Include="bin\Release\app.publish\Application Files\MainApp_1_0_0_7\zh-CHT\Microsoft.ReportViewer.WinForms.resources.dll.deploy" />
+    <None Include="bin\Release\app.publish\MainApp.application" />
+    <None Include="bin\Release\MainApp.application" />
+    <None Include="bin\Release\MainApp.exe.config" />
+    <None Include="bin\Release\MainApp.exe.manifest" />
     <None Include="DatasetMembers.xsc">
       <DependentUpon>DatasetMembers.xsd</DependentUpon>
     </None>
@@ -510,6 +714,15 @@
       <DependentUpon>FUNAAB_CTCS.xsd</DependentUpon>
     </None>
     <None Include="MainApp_TemporaryKey.pfx" />
+    <None Include="obj\Release\DesignTimeResolveAssemblyReferences.cache" />
+    <None Include="obj\Release\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Release\MainApp.application" />
+    <None Include="obj\Release\MainApp.csproj.GenerateResource.Cache" />
+    <None Include="obj\Release\MainApp.csprojResolveAssemblyReference.cache" />
+    <None Include="obj\Release\MainApp.exe.manifest" />
+    <None Include="obj\Release\RdlCompile.cache" />
+    <None Include="obj\Release\RdlCompile.compiled" />
+    <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -527,10 +740,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Datasets\" />
-    <Folder Include="ReportsUI\" />
-    <Folder Include="Reports\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\Debug\MainApp.exe" />
+    <Content Include="bin\Debug\MainApp.pdb" />
+    <Content Include="bin\Debug\MainApp.vshost.exe" />
+    <Content Include="bin\Release\app.publish\setup.exe" />
+    <Content Include="bin\Release\MainApp.exe" />
+    <Content Include="bin\Release\MainApp.pdb" />
     <Content Include="icons\accounting.jpg" />
     <Content Include="icons\add.png" />
     <Content Include="icons\add_icon.png" />
@@ -548,7 +765,24 @@
     <Content Include="icons\save.png" />
     <Content Include="icons\savings.png" />
     <Content Include="icons\search_member2.png" />
+    <Content Include="MainApp_.csproj" />
+    <Content Include="obj\Release\MainApp.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Release\MainApp.exe" />
+    <Content Include="obj\Release\MainApp.pdb" />
+    <Content Include="obj\Release\TempPE\DatasetMembers.Designer.cs.dll" />
+    <Content Include="obj\Release\TempPE\FUNAAB_CTCS.Designer.cs.dll" />
+    <Content Include="obj\Release\TempPE\Properties.Resources.Designer.cs.dll" />
     <Content Include="photos\profile_img.png" />
+    <None Include="Resources\Yes.gif" />
+    <None Include="Resources\Sync.gif" />
+    <None Include="Resources\Text.gif" />
+    <None Include="Resources\Home.gif" />
+    <None Include="Resources\Turn off.gif" />
+    <None Include="Resources\Unlock.gif" />
+    <None Include="Resources\Erase.gif" />
+    <None Include="Resources\directory3.jpg" />
+    <None Include="Resources\remove-icon-png-26_new.png" />
+    <None Include="Resources\excel.ico" />
     <None Include="Resources\New document.gif" />
     <None Include="Resources\Text preview.gif" />
     <None Include="Resources\create1.png" />

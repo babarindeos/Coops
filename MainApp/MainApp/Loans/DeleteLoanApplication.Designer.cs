@@ -29,15 +29,18 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnFindRecord = new System.Windows.Forms.Button();
             this.cboYear = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.cboMonth = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblRecordNo = new System.Windows.Forms.Label();
             this.datGrdVwLoansApp = new System.Windows.Forms.DataGridView();
+            this.saveFD = new System.Windows.Forms.SaveFileDialog();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnExport = new System.Windows.Forms.Button();
+            this.btnReload = new System.Windows.Forms.Button();
+            this.btnFindRecord = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datGrdVwLoansApp)).BeginInit();
@@ -45,6 +48,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnReload);
             this.groupBox1.Controls.Add(this.btnFindRecord);
             this.groupBox1.Controls.Add(this.cboYear);
             this.groupBox1.Controls.Add(this.label2);
@@ -52,20 +56,10 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(9, 15);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(437, 72);
+            this.groupBox1.Size = new System.Drawing.Size(486, 72);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Select Loan Application";
-            // 
-            // btnFindRecord
-            // 
-            this.btnFindRecord.Image = global::MainApp.Properties.Resources.search_member2;
-            this.btnFindRecord.Location = new System.Drawing.Point(361, 28);
-            this.btnFindRecord.Name = "btnFindRecord";
-            this.btnFindRecord.Size = new System.Drawing.Size(57, 35);
-            this.btnFindRecord.TabIndex = 4;
-            this.btnFindRecord.UseVisualStyleBackColor = true;
-            this.btnFindRecord.Click += new System.EventHandler(this.btnFindRecord_Click);
             // 
             // cboYear
             // 
@@ -171,8 +165,9 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.button1);
-            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.btnDelete);
+            this.groupBox2.Controls.Add(this.btnExport);
+            this.groupBox2.Controls.Add(this.lblRecordNo);
             this.groupBox2.Controls.Add(this.datGrdVwLoansApp);
             this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(9, 93);
@@ -181,23 +176,14 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             // 
-            // button1
+            // lblRecordNo
             // 
-            this.button1.Location = new System.Drawing.Point(1058, 378);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(66, 28);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Export";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 387);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(91, 15);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "No. of Records: ";
+            this.lblRecordNo.AutoSize = true;
+            this.lblRecordNo.Location = new System.Drawing.Point(13, 387);
+            this.lblRecordNo.Name = "lblRecordNo";
+            this.lblRecordNo.Size = new System.Drawing.Size(91, 15);
+            this.lblRecordNo.TabIndex = 1;
+            this.lblRecordNo.Text = "No. of Records: ";
             // 
             // datGrdVwLoansApp
             // 
@@ -205,10 +191,58 @@
             this.datGrdVwLoansApp.AllowUserToDeleteRows = false;
             this.datGrdVwLoansApp.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.datGrdVwLoansApp.Location = new System.Drawing.Point(10, 22);
+            this.datGrdVwLoansApp.MultiSelect = false;
             this.datGrdVwLoansApp.Name = "datGrdVwLoansApp";
             this.datGrdVwLoansApp.ReadOnly = true;
+            this.datGrdVwLoansApp.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.datGrdVwLoansApp.Size = new System.Drawing.Size(1112, 350);
             this.datGrdVwLoansApp.TabIndex = 0;
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Image = global::MainApp.Properties.Resources.Erase;
+            this.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDelete.Location = new System.Drawing.Point(1058, 374);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(66, 28);
+            this.btnDelete.TabIndex = 3;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // btnExport
+            // 
+            this.btnExport.Image = global::MainApp.Properties.Resources.excel;
+            this.btnExport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnExport.Location = new System.Drawing.Point(980, 374);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(76, 28);
+            this.btnExport.TabIndex = 2;
+            this.btnExport.Text = "Export";
+            this.btnExport.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnExport.UseVisualStyleBackColor = true;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
+            // btnReload
+            // 
+            this.btnReload.Image = global::MainApp.Properties.Resources.Sync;
+            this.btnReload.Location = new System.Drawing.Point(423, 28);
+            this.btnReload.Name = "btnReload";
+            this.btnReload.Size = new System.Drawing.Size(57, 35);
+            this.btnReload.TabIndex = 5;
+            this.btnReload.UseVisualStyleBackColor = true;
+            this.btnReload.Click += new System.EventHandler(this.btnReload_Click);
+            // 
+            // btnFindRecord
+            // 
+            this.btnFindRecord.Image = global::MainApp.Properties.Resources.search_member2;
+            this.btnFindRecord.Location = new System.Drawing.Point(361, 28);
+            this.btnFindRecord.Name = "btnFindRecord";
+            this.btnFindRecord.Size = new System.Drawing.Size(57, 35);
+            this.btnFindRecord.TabIndex = 4;
+            this.btnFindRecord.UseVisualStyleBackColor = true;
+            this.btnFindRecord.Click += new System.EventHandler(this.btnFindRecord_Click);
             // 
             // DeleteLoanApplication
             // 
@@ -243,7 +277,10 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnFindRecord;
         private System.Windows.Forms.DataGridView datGrdVwLoansApp;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label lblRecordNo;
+        private System.Windows.Forms.Button btnExport;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.SaveFileDialog saveFD;
+        private System.Windows.Forms.Button btnReload;
     }
 }

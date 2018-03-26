@@ -669,9 +669,9 @@
             this.lblRegularSavings.AutoSize = true;
             this.lblRegularSavings.Location = new System.Drawing.Point(12, 31);
             this.lblRegularSavings.Name = "lblRegularSavings";
-            this.lblRegularSavings.Size = new System.Drawing.Size(111, 19);
+            this.lblRegularSavings.Size = new System.Drawing.Size(99, 19);
             this.lblRegularSavings.TabIndex = 2;
-            this.lblRegularSavings.Text = "Personal Savings";
+            this.lblRegularSavings.Text = "Shares Savings";
             // 
             // groupBox6
             // 

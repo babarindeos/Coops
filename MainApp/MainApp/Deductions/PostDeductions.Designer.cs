@@ -46,8 +46,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtAddFileNo = new System.Windows.Forms.TextBox();
             this.grpDeductionList = new System.Windows.Forms.GroupBox();
-            this.listView1 = new System.Windows.Forms.ListView();
             this.btnViewSelectedDeduction = new System.Windows.Forms.Button();
+            this.lstVwDeductionList = new System.Windows.Forms.ListView();
+            this.btnExport = new System.Windows.Forms.Button();
+            this.saveFD = new System.Windows.Forms.SaveFileDialog();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -67,14 +69,14 @@
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(872, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(296, 89);
+            this.groupBox1.Size = new System.Drawing.Size(286, 100);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Previous | Current Deduction Dates";
             // 
             // btnPostDeduction
             // 
-            this.btnPostDeduction.Location = new System.Drawing.Point(186, 51);
+            this.btnPostDeduction.Location = new System.Drawing.Point(175, 59);
             this.btnPostDeduction.Name = "btnPostDeduction";
             this.btnPostDeduction.Size = new System.Drawing.Size(101, 32);
             this.btnPostDeduction.TabIndex = 3;
@@ -85,7 +87,7 @@
             // cboYear
             // 
             this.cboYear.FormattingEnabled = true;
-            this.cboYear.Location = new System.Drawing.Point(111, 56);
+            this.cboYear.Location = new System.Drawing.Point(98, 64);
             this.cboYear.Name = "cboYear";
             this.cboYear.Size = new System.Drawing.Size(72, 23);
             this.cboYear.TabIndex = 2;
@@ -93,15 +95,15 @@
             // cboMonth
             // 
             this.cboMonth.FormattingEnabled = true;
-            this.cboMonth.Location = new System.Drawing.Point(6, 56);
+            this.cboMonth.Location = new System.Drawing.Point(6, 64);
             this.cboMonth.Name = "cboMonth";
-            this.cboMonth.Size = new System.Drawing.Size(101, 23);
+            this.cboMonth.Size = new System.Drawing.Size(88, 23);
             this.cboMonth.TabIndex = 1;
             // 
             // lblPreviousPosting
             // 
             this.lblPreviousPosting.AutoSize = true;
-            this.lblPreviousPosting.Location = new System.Drawing.Point(11, 29);
+            this.lblPreviousPosting.Location = new System.Drawing.Point(5, 23);
             this.lblPreviousPosting.Name = "lblPreviousPosting";
             this.lblPreviousPosting.Size = new System.Drawing.Size(36, 15);
             this.lblPreviousPosting.TabIndex = 0;
@@ -182,7 +184,8 @@
             // 
             // btnRemoveDeductions
             // 
-            this.btnRemoveDeductions.Location = new System.Drawing.Point(878, 117);
+            this.btnRemoveDeductions.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRemoveDeductions.Location = new System.Drawing.Point(872, 130);
             this.btnRemoveDeductions.Name = "btnRemoveDeductions";
             this.btnRemoveDeductions.Size = new System.Drawing.Size(80, 28);
             this.btnRemoveDeductions.TabIndex = 5;
@@ -207,7 +210,8 @@
             this.groupBox5.Controls.Add(this.label1);
             this.groupBox5.Controls.Add(this.txtAddFileNo);
             this.groupBox5.Controls.Add(this.btnAddDeduction);
-            this.groupBox5.Location = new System.Drawing.Point(962, 100);
+            this.groupBox5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox5.Location = new System.Drawing.Point(952, 113);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(206, 49);
             this.groupBox5.TabIndex = 7;
@@ -218,7 +222,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(5, 21);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 17);
+            this.label1.Size = new System.Drawing.Size(47, 15);
             this.label1.TabIndex = 8;
             this.label1.Text = "File No.";
             // 
@@ -234,37 +238,54 @@
             // grpDeductionList
             // 
             this.grpDeductionList.Controls.Add(this.btnViewSelectedDeduction);
-            this.grpDeductionList.Controls.Add(this.listView1);
+            this.grpDeductionList.Controls.Add(this.lstVwDeductionList);
             this.grpDeductionList.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpDeductionList.Location = new System.Drawing.Point(1171, 2);
+            this.grpDeductionList.Location = new System.Drawing.Point(1164, 2);
             this.grpDeductionList.Name = "grpDeductionList";
-            this.grpDeductionList.Size = new System.Drawing.Size(113, 180);
+            this.grpDeductionList.Size = new System.Drawing.Size(127, 180);
             this.grpDeductionList.TabIndex = 8;
             this.grpDeductionList.TabStop = false;
             this.grpDeductionList.Text = "Deduction List";
             // 
-            // listView1
-            // 
-            this.listView1.Location = new System.Drawing.Point(7, 19);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(100, 128);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            // 
             // btnViewSelectedDeduction
             // 
-            this.btnViewSelectedDeduction.Location = new System.Drawing.Point(25, 151);
+            this.btnViewSelectedDeduction.Location = new System.Drawing.Point(33, 151);
             this.btnViewSelectedDeduction.Name = "btnViewSelectedDeduction";
             this.btnViewSelectedDeduction.Size = new System.Drawing.Size(67, 25);
             this.btnViewSelectedDeduction.TabIndex = 1;
             this.btnViewSelectedDeduction.Text = "View";
             this.btnViewSelectedDeduction.UseVisualStyleBackColor = true;
+            this.btnViewSelectedDeduction.Click += new System.EventHandler(this.btnViewSelectedDeduction_Click);
+            // 
+            // lstVwDeductionList
+            // 
+            this.lstVwDeductionList.Location = new System.Drawing.Point(3, 19);
+            this.lstVwDeductionList.Name = "lstVwDeductionList";
+            this.lstVwDeductionList.Size = new System.Drawing.Size(120, 128);
+            this.lstVwDeductionList.TabIndex = 0;
+            this.lstVwDeductionList.UseCompatibleStateImageBehavior = false;
+            // 
+            // btnExport
+            // 
+            this.btnExport.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExport.Image = global::MainApp.Properties.Resources.excel;
+            this.btnExport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnExport.Location = new System.Drawing.Point(787, 504);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(79, 31);
+            this.btnExport.TabIndex = 9;
+            this.btnExport.Text = "Export";
+            this.btnExport.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnExport.UseVisualStyleBackColor = true;
+            this.btnExport.Visible = false;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // PostDeductions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1296, 531);
+            this.ClientSize = new System.Drawing.Size(1296, 538);
+            this.Controls.Add(this.btnExport);
             this.Controls.Add(this.grpDeductionList);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.btnRemoveDeductions);
@@ -315,7 +336,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtAddFileNo;
         private System.Windows.Forms.GroupBox grpDeductionList;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView lstVwDeductionList;
         private System.Windows.Forms.Button btnViewSelectedDeduction;
+        private System.Windows.Forms.Button btnExport;
+        private System.Windows.Forms.SaveFileDialog saveFD;
     }
 }

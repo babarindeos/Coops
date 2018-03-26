@@ -105,7 +105,7 @@ namespace MainApp
         private void displayAllMembersSavingsDetails(string strFilter)
         {
             SqlConnection conn = ConnectDB.GetConnection();
-            string strQuery = "Select m.MemberID, m.FileNo, m.Title + ' ' + m.LastName + ' ' + m.FirstName + ' ' + m.MiddleName as Fullname, " +
+            string strQuery = "Select s.SavingsID, m.MemberID, m.FileNo, m.Title + ' ' + m.LastName + ' ' + m.FirstName + ' ' + m.MiddleName as Fullname, " +
                 "s.SavingSource as Source, s.Amount, d.Month, s.year as Year, s.TransactionID, s.Date from Members m left join Savings s on m.MemberID=s.MemberID " +
                 "left join MonthByName d on s.Month=d.MonthID " + strFilter +
                 " order by s.SavingsID desc";
@@ -127,6 +127,7 @@ namespace MainApp
 
                 datGridSavingsDetails.DataSource = dtSavingsDetails;
 
+                datGridSavingsDetails.Columns["SavingsID"].Visible = false;
                 datGridSavingsDetails.Columns["MemberID"].Visible = false;
                 datGridSavingsDetails.Columns["Fullname"].Width = 200;
                 datGridSavingsDetails.Columns["FileNo"].Width = 80;
@@ -202,22 +203,29 @@ namespace MainApp
             {
                 theID = datGridViewSavings.Rows[e.RowIndex].Cells[1].Value.ToString();
                 totalSavings = datGridViewSavings.Rows[e.RowIndex].Cells[4].Value.ToString().Trim();
+                //MessageBox.Show("ID: " + theID + "total Savings: " + totalSavings);
             }
             else if (e.ColumnIndex==4)
             {
                 theID = datGridViewSavings.Rows[e.RowIndex].Cells[0].Value.ToString();
-                
+                totalSavings = datGridViewSavings.Rows[e.RowIndex].Cells[4].Value.ToString().Trim();
+                //MessageBox.Show("ID: " + theID);
             }
             //MessageBox.Show(totalSavings.ToString());
-            if (e.ColumnIndex == 0 && totalSavings != string.Empty)
+            if ((e.ColumnIndex == 0 || e.ColumnIndex==4) && totalSavings != string.Empty)
             {
-                memberID = Convert.ToInt16(theID);
+                //MessageBox.Show(e.ColumnIndex.ToString() + "ID: " + theID);
+                if (CheckForNumber.isNumeric(theID))
+                {
+                    
+                    memberID = Convert.ToInt16(theID);
 
-                strFilter = "where m.MemberID=" + memberID + addFilter;
-                displayAllMembersSavingsDetails(strFilter);
+                    strFilter = "where m.MemberID=" + memberID + addFilter;
+                    displayAllMembersSavingsDetails(strFilter);
 
-                strFilter = "where MemberID=" + memberID + addFilter2;
-                getSelectedDetailsTotalSavings(strFilter);
+                    strFilter = "where MemberID=" + memberID + addFilter2;
+                    getSelectedDetailsTotalSavings(strFilter);
+                }
             }
             else
             {
@@ -566,6 +574,36 @@ namespace MainApp
 
         private void btnDateFilter_Click_1(object sender, EventArgs e)
         {
+
+        }
+
+        private void datGridSavingsDetails_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            string savingsID = string.Empty;
+            string savingSource = string.Empty;
+            string transactionID = string.Empty;
+
+            //MessageBox.Show(e.ColumnIndex.ToString());
+            if (e.ColumnIndex == 0)
+            {
+                savingsID = datGridSavingsDetails.Rows[e.RowIndex].Cells[1].Value.ToString();
+                savingSource = datGridSavingsDetails.Rows[e.RowIndex].Cells[5].Value.ToString();
+                transactionID = datGridSavingsDetails.Rows[e.RowIndex].Cells[9].Value.ToString();
+            }
+            else if(e.ColumnIndex==10)
+            {
+                savingsID = datGridSavingsDetails.Rows[e.RowIndex].Cells[0].Value.ToString();
+                savingSource = datGridSavingsDetails.Rows[e.RowIndex].Cells[4].Value.ToString();
+                transactionID = datGridSavingsDetails.Rows[e.RowIndex].Cells[8].Value.ToString();
+            }
+
+            if (e.ColumnIndex == 0 || e.ColumnIndex == 10)
+            {
+                ViewSavingsDetails viewSavingsDetails = new ViewSavingsDetails(savingsID, savingSource, transactionID);
+                //MessageBox.Show("Saving Source: " + savingSource + "\nSavings ID: " + savingSource + "\nTransactionID " + transactionID);
+                viewSavingsDetails.MdiParent = this.ParentForm;
+                viewSavingsDetails.Show();
+            }
 
         }
 

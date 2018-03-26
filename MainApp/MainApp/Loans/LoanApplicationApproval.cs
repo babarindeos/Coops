@@ -13,7 +13,8 @@ namespace MainApp
 {
     public partial class LoanApplicationApproval : Form
     {
-        string paths = Application.StartupPath.Substring(0, (Application.StartupPath.Length - 10));
+        //string paths = Application.StartupPath.Substring(0, (Application.StartupPath.Length - 10));
+        string paths = PhotoPath.getPath();
         string strFilter;
 
         public LoanApplicationApproval()
@@ -115,6 +116,7 @@ namespace MainApp
             {
                  getLoanApplicationDetails(transactionID, loanApplicationID);
                  datLoanApplicationGridView.Rows[e.RowIndex].Selected = true;
+                 groupBox7.Visible = true;
             }
             
             //MessageBox.Show("Transaction ID: " + transactionID + "\nloanApplicationID: " + loanApplicationID);
@@ -158,7 +160,7 @@ namespace MainApp
                 txtMemberProfile.Text = reader["LastName"] + " " + reader["FirstName"] + " " + reader["MiddleName"];
                 lblMemberFileNo.Text = reader["FileNo"].ToString();
 
-                if (reader["Photo"].ToString() != null || reader["Photo"].ToString() == string.Empty)
+                if (reader["Photo"].ToString() == null || reader["Photo"].ToString() == string.Empty)
                 {
                     picMember.Image = Image.FromFile(paths + "//photos//" + reader["Photo"].ToString());
                 }
@@ -659,7 +661,12 @@ namespace MainApp
                 MessageBox.Show("Select a Status option to proceed with the search", "Loan Application Status", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            
+
+        }
+
+        private void datLoanApplicationGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
 
     }

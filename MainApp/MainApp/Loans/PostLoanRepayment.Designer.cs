@@ -542,12 +542,11 @@
             // 
             // label14
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(39, 78);
+            this.label14.Location = new System.Drawing.Point(31, 77);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(47, 15);
+            this.label14.Size = new System.Drawing.Size(66, 36);
             this.label14.TabIndex = 24;
-            this.label14.Text = "Remark";
+            this.label14.Text = "Teller No.  Remark";
             // 
             // txtPayAmount
             // 

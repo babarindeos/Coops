@@ -37,6 +37,7 @@
             this.grpBoxSavingsInfo = new System.Windows.Forms.GroupBox();
             this.dtGrdVwSavings = new System.Windows.Forms.DataGridView();
             this.grpBoxDetails = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.lblSavingsID = new System.Windows.Forms.Label();
             this.lblSavingsForwardID = new System.Windows.Forms.Label();
             this.btnChange = new System.Windows.Forms.Button();
@@ -49,7 +50,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.lstVwSavingDetails = new System.Windows.Forms.ListView();
             this.btnUpdate = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picMember)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.grpBoxSavingsInfo.SuspendLayout();
@@ -70,6 +70,7 @@
             // 
             // picMember
             // 
+            this.picMember.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picMember.Location = new System.Drawing.Point(271, 5);
             this.picMember.Name = "picMember";
             this.picMember.Size = new System.Drawing.Size(78, 75);
@@ -158,6 +159,16 @@
             this.grpBoxDetails.TabIndex = 7;
             this.grpBoxDetails.TabStop = false;
             this.grpBoxDetails.Text = "Savings Details";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(7, 196);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(39, 15);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "Total: ";
             // 
             // lblSavingsID
             // 
@@ -270,16 +281,6 @@
             this.btnUpdate.Text = "Update";
             this.btnUpdate.UseVisualStyleBackColor = true;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(7, 196);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(39, 15);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "Total: ";
             // 
             // EditSavingsForward
             // 

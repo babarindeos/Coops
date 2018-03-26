@@ -61,11 +61,16 @@ namespace MainApp
                     lblMemberProfile.Text = reader["FullName"].ToString() + "\n" + reader["FileNo"].ToString();
 
                     //display member photo
-                    string paths = Application.StartupPath.Substring(0, (Application.StartupPath.Length - 10));
-                    if (reader["Photo"].ToString() != null || reader["Photo"].ToString() == string.Empty)
+                    string paths = PhotoPath.getPath();
+                    if (reader["Photo"].ToString() == string.Empty)
                     {
                         picMember.Image = Image.FromFile(paths + "//photos//" + reader["Photo"].ToString());
                     }
+                    else
+                    {
+                        picMember.Image = Image.FromFile(paths + "\\photos\\profile_img.png");
+                    }
+
                     picMember.Visible = true;
                     lblMemberProfile.Visible = true;
 
@@ -170,7 +175,7 @@ namespace MainApp
 
                             if ((reader["SavingsTypeID"].ToString()) == "99")
                             {
-                                savingsAcct = "Personal Savings";
+                                savingsAcct = "Shares Savings";
                             }
                             else
                             {
@@ -267,7 +272,7 @@ namespace MainApp
                 cboSavingsType.DataSource = dt;
 
                 DataRow row = dt.NewRow();
-                row["SavingsName"] = "Personal Savings";
+                row["SavingsName"] = "Shares Savings";
                 row["SavingsTypeID"] = 99;
 
                 dt.Rows.InsertAt(row, 0);
@@ -304,7 +309,7 @@ namespace MainApp
             }
             else
             {
-                MessageBox.Show("Select a Savings Accoount Type to maake an Update", "Savings", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Select a Savings Account Type to maake an Update", "Savings", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 

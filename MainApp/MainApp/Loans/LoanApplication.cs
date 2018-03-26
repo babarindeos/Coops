@@ -15,9 +15,10 @@ namespace MainApp
     {
 
         SqlConnection conn = ConnectDB.GetConnection();
-        string paths = Application.StartupPath.Substring(0, (Application.StartupPath.Length - 10));
+        string paths = PhotoPath.getPath();
 
         private string userId;
+        private string memberID;
 
         public LoanApplication(string UserID)
         {
@@ -169,7 +170,7 @@ namespace MainApp
                         {
                             lblMemberProfile.Visible = true;
                             lblMemberProfile.Text = reader["Title"].ToString() + " " + reader["LastName"].ToString() + " " + reader["FirstName"].ToString() + " " + reader["MiddleName"].ToString().Substring(0) + ".";
-
+                            memberID = reader["MemberID"].ToString();
 
                             if ( reader["Photo"].ToString()!=null && reader["Photo"].ToString() != string.Empty)
                             {
@@ -264,6 +265,7 @@ namespace MainApp
             if (cboType.Text != "-- Select a Loan Type --")
             {
                 txtAmount.Enabled = true;
+                txtFormFee.Enabled = true;
                 #region retrieveLoanDetails
 
                     SqlConnection conn = ConnectDB.GetConnection();
@@ -297,6 +299,7 @@ namespace MainApp
             else
             {
                 txtAmount.Enabled = false;
+                txtFormFee.Enabled = false;
             }
         }
 
@@ -442,6 +445,7 @@ namespace MainApp
                 if (txtSuretyFileNo1.Text != cboFileNo.Text && txtSuretyFileNo1.Text != txtSuretyFileNo2.Text && txtSuretyFileNo1.Text != txtWitnessFileNo.Text)
                 {
                     getSuretyData(strSender, txtSuretyFileNo1.Text);
+                  
                 }
                 else
                 {
@@ -480,9 +484,9 @@ namespace MainApp
                             picSurety1.Visible = true;
                             lblSurety1.Text = "Surety 1\n" + memberProfile;
                             lblSuretyMemberID_1.Text = memberID;
-                            if (memberPic == string.Empty)
+                            if (memberPic != string.Empty)
                             {
-                                picSurety1.Image = Image.FromFile(paths + "//photos//" + memberPic.ToString());
+                                picSurety1.Image = Image.FromFile(paths + "//photos//" + memberPic.ToString());                                
                             }
                             break;
                         case "Surety2":
@@ -490,7 +494,7 @@ namespace MainApp
                             picSurety2.Visible = true;
                             lblSurety2.Text = "Surety 2\n" + memberProfile;
                             lblSuretyMemberID_2.Text = memberID;
-                            if (memberPic == string.Empty)
+                            if (memberPic != string.Empty)
                             {
                                 picSurety2.Image = Image.FromFile(paths + "//photos//" + memberPic.ToString());
                             }
@@ -655,6 +659,16 @@ namespace MainApp
                 errMessage += "No Loan Amount has been specified\n"; 
             }
 
+            if (!CheckForNumber.isNumeric(txtAmount.Text))
+            {
+                errMessage += "Loan Amount is in invalid format\n";
+            }
+
+            if (txtFormFee.Text == string.Empty || (!CheckForNumber.isNumeric(txtFormFee.Text)))
+            {
+                errMessage += "Form Fee is in invalid format\n";
+            }
+
             if (errMessage != string.Empty)
             {
                 verificationStatus = false;
@@ -669,10 +683,10 @@ namespace MainApp
         {
             SqlConnection conn = ConnectDB.GetConnection();
             string strQuery = "Insert into LoanApplication(AppMonth,AppYear,MemberID,LoanCategoryID,LoanTypeID," +
-                "LoanAmount,StartRepaymentMonth,StartRepaymentYear,SuretyMemberID1,SuretyMemberID2,WitnessMemberID," +
+                "LoanAmount,FormFee,StartRepaymentMonth,StartRepaymentYear,SuretyMemberID1,SuretyMemberID2,WitnessMemberID," +
                 "NonMemberSurety1,NonMemberSurety2,NonMemberWitness,LoanDuration,InterestRate,InterestAmount," +
                 "TotalRepayment,MonthlyRepayment,TransactionID)values(@AppMonth,@AppYear,@MemberID,@LoanCategoryID,@LoanTypeID,"+
-            "@LoanAmount,@StartRepaymentMonth,@StartRepaymentYear,@SuretyMemberID1,@SuretyMemberID2,@WitnessMemberID,"+
+            "@LoanAmount,@FormFee,@StartRepaymentMonth,@StartRepaymentYear,@SuretyMemberID1,@SuretyMemberID2,@WitnessMemberID,"+
             "@NonMemberSurety1,@NonMemberSurety2,@NonMemberWitness,@LoanDuration,@InterestRate,@InterestAmount,"+
             "@TotalRepayment,@MonthlyRepayment,@TransactionID)";
 
@@ -688,8 +702,8 @@ namespace MainApp
             cmd.Parameters.Add("@AppYear", SqlDbType.Int);
             cmd.Parameters["@AppYear"].Value = Convert.ToInt32(cboYear.Text);
 
-            cmd.Parameters.Add("@MemberID", SqlDbType.Int);
-            cmd.Parameters["@MemberID"].Value = Convert.ToInt32(cboFileNo.SelectedValue.ToString());
+            cmd.Parameters.Add("@MemberID", SqlDbType.Int);        
+            cmd.Parameters["@MemberID"].Value = memberID;
 
             cmd.Parameters.Add("@LoanCategoryID", SqlDbType.Int);
             cmd.Parameters["@LoanCategoryID"].Value = Convert.ToInt32(cboCategory.SelectedValue.ToString());
@@ -699,6 +713,9 @@ namespace MainApp
 
             cmd.Parameters.Add("@LoanAmount", SqlDbType.Decimal);
             cmd.Parameters["@LoanAmount"].Value = Convert.ToDecimal(txtAmount.Text);
+
+            cmd.Parameters.Add("@FormFee", SqlDbType.Decimal);
+            cmd.Parameters["@FormFee"].Value = Convert.ToDecimal(txtFormFee.Text);
 
                     int startRepaymentMonth = 0;
                     int startRepaymentYear = 0;
@@ -863,6 +880,11 @@ namespace MainApp
         private void lblSurety2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void txtFormFee_Leave(object sender, EventArgs e)
+        {
+            txtFormFee.Text = CheckForNumber.formatCurrency2(txtFormFee.Text);
         }
        
 

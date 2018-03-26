@@ -118,7 +118,7 @@ namespace MainApp
                         picMember.Image = Image.FromFile(paths + "//photos//" + memberPic);
                     }
 
-                    MemberProfileInfo.Text = fullName + "\n" + txtFileNo.Text;
+                    MemberProfileInfo.Text = fullName + "\n" + txtFileNo.Text.ToUpper();
                     MemberProfileInfo.Visible = true;
 
                     //check if member has any loan to service
@@ -163,7 +163,7 @@ namespace MainApp
                 }
                 else
                 {
-                    MessageBox.Show("Sorry, there is no member with that File No.", "Loans", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Sorry, there is either no member with that File No. or\nThe member does not have Loan Information at the moment.", "Loans", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     
                     //Record false if Member record does not exist
                     isRecordFound = false;

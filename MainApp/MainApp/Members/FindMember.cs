@@ -152,13 +152,20 @@ namespace MainApp
                     txtNOKAddress.Text = reader["NOKAddress"].ToString();
                     txtNOKPhone.Text = reader["NOKPhone"].ToString();
 
+                    string paths = PhotoPath.getPath();
+
                     if (reader["Photo"].ToString() != string.Empty)
                     {
-                        
+
                         //Load User picture
-                        string paths = Application.StartupPath.Substring(0, (Application.StartupPath.Length - 9));
+                        //string paths = Application.StartupPath.Substring(0, (Application.StartupPath.Length - 9));
+
                         picMember.Image = Image.FromFile(paths + "\\photos\\" + reader["Photo"].ToString());
                         //MessageBox.Show(paths);
+                    }
+                    else
+                    {
+                        picMember.Image = Image.FromFile(paths + "\\photos\\profile_img.png"); 
                     }
 
                     memberID = (int)reader["MemberID"];

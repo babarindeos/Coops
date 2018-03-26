@@ -32,8 +32,6 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logOffToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.exitApplicationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.membershipToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.registrationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.memberListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,14 +51,25 @@
             this.makeContributionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editContributionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewContributionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteContributionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.withdrawalToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.makeWithdrawalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteWithdrawalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loansToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loanApplicationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newApplicationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewApplicationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loansApprovalToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.loanCatalogueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.postRepaymentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteRepaymentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewLoansToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
+            this.loanBrougntForwardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newLoanBFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.deductionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.postDeductionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.individualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -100,6 +109,8 @@
             this.addTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dBBackupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.usersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonNewMember = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonMembers = new System.Windows.Forms.ToolStripButton();
@@ -110,9 +121,12 @@
             this.toolStripButtonEditSavings = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusOps = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLoggedInUser = new System.Windows.Forms.ToolStripStatusLabel();
-            this.usersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dBBackupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLblSpring = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLblLoggedInUser = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblLoggedInUserID = new System.Windows.Forms.Label();
+            this.lblLoggedInUserName = new System.Windows.Forms.Label();
+            this.memberSavingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -125,6 +139,7 @@
             this.membershipToolStripMenuItem,
             this.savingsToolStripMenuItem,
             this.contributiontoolStripMenuItem,
+            this.withdrawalToolStripMenuItem1,
             this.loansToolStripMenuItem,
             this.deductionsToolStripMenuItem,
             this.reportsToolStripMenuItem,
@@ -140,36 +155,24 @@
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.closeToolStripMenuItem,
-            this.logOffToolStripMenuItem,
-            this.toolStripMenuItem1,
-            this.exitApplicationToolStripMenuItem});
+            this.logOffToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // closeToolStripMenuItem
             // 
+            this.closeToolStripMenuItem.Image = global::MainApp.Properties.Resources.Home;
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.closeToolStripMenuItem.Text = "Close";
             // 
             // logOffToolStripMenuItem
             // 
+            this.logOffToolStripMenuItem.Image = global::MainApp.Properties.Resources.Turn_off;
             this.logOffToolStripMenuItem.Name = "logOffToolStripMenuItem";
-            this.logOffToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.logOffToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.logOffToolStripMenuItem.Text = "Log Off";
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(153, 6);
-            // 
-            // exitApplicationToolStripMenuItem
-            // 
-            this.exitApplicationToolStripMenuItem.Name = "exitApplicationToolStripMenuItem";
-            this.exitApplicationToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
-            this.exitApplicationToolStripMenuItem.Text = "Exit Application";
-            this.exitApplicationToolStripMenuItem.Click += new System.EventHandler(this.exitApplicationToolStripMenuItem_Click);
             // 
             // membershipToolStripMenuItem
             // 
@@ -182,6 +185,7 @@
             this.membershipToolStripMenuItem.Name = "membershipToolStripMenuItem";
             this.membershipToolStripMenuItem.Size = new System.Drawing.Size(86, 20);
             this.membershipToolStripMenuItem.Text = "Membership";
+            this.membershipToolStripMenuItem.Click += new System.EventHandler(this.membershipToolStripMenuItem_Click);
             // 
             // registrationToolStripMenuItem
             // 
@@ -238,7 +242,7 @@
             // 
             this.setupSavingsToolStripMenuItem.Image = global::MainApp.Properties.Resources.savings;
             this.setupSavingsToolStripMenuItem.Name = "setupSavingsToolStripMenuItem";
-            this.setupSavingsToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.setupSavingsToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.setupSavingsToolStripMenuItem.Text = "Setup Savings";
             this.setupSavingsToolStripMenuItem.Click += new System.EventHandler(this.setupSavingsToolStripMenuItem_Click);
             // 
@@ -246,7 +250,7 @@
             // 
             this.editSavingsToolStripMenuItem.Image = global::MainApp.Properties.Resources.edit_savings;
             this.editSavingsToolStripMenuItem.Name = "editSavingsToolStripMenuItem";
-            this.editSavingsToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.editSavingsToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.editSavingsToolStripMenuItem.Text = "Edit Savings";
             this.editSavingsToolStripMenuItem.Click += new System.EventHandler(this.editSavingsToolStripMenuItem_Click);
             // 
@@ -254,14 +258,14 @@
             // 
             this.viewSavingsToolStripMenuItem.Image = global::MainApp.Properties.Resources.Text_preview;
             this.viewSavingsToolStripMenuItem.Name = "viewSavingsToolStripMenuItem";
-            this.viewSavingsToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.viewSavingsToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.viewSavingsToolStripMenuItem.Text = "View Savings";
             this.viewSavingsToolStripMenuItem.Click += new System.EventHandler(this.viewSavingsToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(157, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(203, 6);
             // 
             // savingsForwardToolStripMenuItem
             // 
@@ -270,8 +274,8 @@
             this.editToolStripMenuItem,
             this.deleteToolStripMenuItem1});
             this.savingsForwardToolStripMenuItem.Name = "savingsForwardToolStripMenuItem";
-            this.savingsForwardToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.savingsForwardToolStripMenuItem.Text = "Savings Forward";
+            this.savingsForwardToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
+            this.savingsForwardToolStripMenuItem.Text = "Savings Brought Forward";
             this.savingsForwardToolStripMenuItem.Click += new System.EventHandler(this.savingsForwardToolStripMenuItem_Click);
             // 
             // newPostingToolStripMenuItem
@@ -292,6 +296,7 @@
             // 
             // deleteToolStripMenuItem1
             // 
+            this.deleteToolStripMenuItem1.Image = global::MainApp.Properties.Resources.Erase;
             this.deleteToolStripMenuItem1.Name = "deleteToolStripMenuItem1";
             this.deleteToolStripMenuItem1.Size = new System.Drawing.Size(107, 22);
             this.deleteToolStripMenuItem1.Text = "Delete";
@@ -302,38 +307,77 @@
             this.contributiontoolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.makeContributionToolStripMenuItem,
             this.editContributionsToolStripMenuItem,
-            this.viewContributionsToolStripMenuItem});
+            this.viewContributionsToolStripMenuItem,
+            this.deleteContributionsToolStripMenuItem});
             this.contributiontoolStripMenuItem.Name = "contributiontoolStripMenuItem";
             this.contributiontoolStripMenuItem.Size = new System.Drawing.Size(92, 20);
             this.contributiontoolStripMenuItem.Text = "Contributions";
             // 
             // makeContributionToolStripMenuItem
             // 
+            this.makeContributionToolStripMenuItem.Image = global::MainApp.Properties.Resources.savings;
             this.makeContributionToolStripMenuItem.Name = "makeContributionToolStripMenuItem";
-            this.makeContributionToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.makeContributionToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.makeContributionToolStripMenuItem.Text = "Make Contributions";
             this.makeContributionToolStripMenuItem.Click += new System.EventHandler(this.makeContributionToolStripMenuItem_Click);
             // 
             // editContributionsToolStripMenuItem
             // 
+            this.editContributionsToolStripMenuItem.Image = global::MainApp.Properties.Resources.edit_savings;
             this.editContributionsToolStripMenuItem.Name = "editContributionsToolStripMenuItem";
-            this.editContributionsToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.editContributionsToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.editContributionsToolStripMenuItem.Text = "Edit Contributions";
             this.editContributionsToolStripMenuItem.Click += new System.EventHandler(this.editContributionsToolStripMenuItem_Click);
             // 
             // viewContributionsToolStripMenuItem
             // 
+            this.viewContributionsToolStripMenuItem.Image = global::MainApp.Properties.Resources.Text_preview;
             this.viewContributionsToolStripMenuItem.Name = "viewContributionsToolStripMenuItem";
-            this.viewContributionsToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.viewContributionsToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.viewContributionsToolStripMenuItem.Text = "View Contributions";
             this.viewContributionsToolStripMenuItem.Click += new System.EventHandler(this.viewContributionsToolStripMenuItem_Click);
+            // 
+            // deleteContributionsToolStripMenuItem
+            // 
+            this.deleteContributionsToolStripMenuItem.Image = global::MainApp.Properties.Resources.Erase;
+            this.deleteContributionsToolStripMenuItem.Name = "deleteContributionsToolStripMenuItem";
+            this.deleteContributionsToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.deleteContributionsToolStripMenuItem.Text = "Delete Contributions";
+            // 
+            // withdrawalToolStripMenuItem1
+            // 
+            this.withdrawalToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.makeWithdrawalToolStripMenuItem,
+            this.deleteWithdrawalToolStripMenuItem});
+            this.withdrawalToolStripMenuItem1.Name = "withdrawalToolStripMenuItem1";
+            this.withdrawalToolStripMenuItem1.Size = new System.Drawing.Size(79, 20);
+            this.withdrawalToolStripMenuItem1.Text = "Withdrawal";
+            // 
+            // makeWithdrawalToolStripMenuItem
+            // 
+            this.makeWithdrawalToolStripMenuItem.Image = global::MainApp.Properties.Resources.savings;
+            this.makeWithdrawalToolStripMenuItem.Name = "makeWithdrawalToolStripMenuItem";
+            this.makeWithdrawalToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.makeWithdrawalToolStripMenuItem.Text = "Make Withdrawal";
+            this.makeWithdrawalToolStripMenuItem.Click += new System.EventHandler(this.makeWithdrawalToolStripMenuItem_Click);
+            // 
+            // deleteWithdrawalToolStripMenuItem
+            // 
+            this.deleteWithdrawalToolStripMenuItem.Image = global::MainApp.Properties.Resources.Erase;
+            this.deleteWithdrawalToolStripMenuItem.Name = "deleteWithdrawalToolStripMenuItem";
+            this.deleteWithdrawalToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.deleteWithdrawalToolStripMenuItem.Text = "Delete Withdrawal";
+            this.deleteWithdrawalToolStripMenuItem.Click += new System.EventHandler(this.deleteWithdrawalToolStripMenuItem_Click);
             // 
             // loansToolStripMenuItem
             // 
             this.loansToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.loanApplicationToolStripMenuItem,
             this.loansApprovalToolStripMenuItem1,
-            this.loanCatalogueToolStripMenuItem});
+            this.loanCatalogueToolStripMenuItem,
+            this.viewLoansToolStripMenuItem,
+            this.toolStripMenuItem3,
+            this.loanBrougntForwardToolStripMenuItem});
             this.loansToolStripMenuItem.Name = "loansToolStripMenuItem";
             this.loansToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
             this.loansToolStripMenuItem.Text = "Loans";
@@ -342,20 +386,32 @@
             // 
             this.loanApplicationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newApplicationToolStripMenuItem,
+            this.viewApplicationsToolStripMenuItem,
             this.deleteToolStripMenuItem});
+            this.loanApplicationToolStripMenuItem.Image = global::MainApp.Properties.Resources.Text;
             this.loanApplicationToolStripMenuItem.Name = "loanApplicationToolStripMenuItem";
             this.loanApplicationToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.loanApplicationToolStripMenuItem.Text = "Loan Application";
             // 
             // newApplicationToolStripMenuItem
             // 
+            this.newApplicationToolStripMenuItem.Image = global::MainApp.Properties.Resources.New_document;
             this.newApplicationToolStripMenuItem.Name = "newApplicationToolStripMenuItem";
             this.newApplicationToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.newApplicationToolStripMenuItem.Text = "New Application";
             this.newApplicationToolStripMenuItem.Click += new System.EventHandler(this.newApplicationToolStripMenuItem_Click);
             // 
+            // viewApplicationsToolStripMenuItem
+            // 
+            this.viewApplicationsToolStripMenuItem.Image = global::MainApp.Properties.Resources.Text;
+            this.viewApplicationsToolStripMenuItem.Name = "viewApplicationsToolStripMenuItem";
+            this.viewApplicationsToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.viewApplicationsToolStripMenuItem.Text = "View Applications";
+            this.viewApplicationsToolStripMenuItem.Click += new System.EventHandler(this.viewApplicationsToolStripMenuItem_Click);
+            // 
             // deleteToolStripMenuItem
             // 
+            this.deleteToolStripMenuItem.Image = global::MainApp.Properties.Resources.Erase;
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
             this.deleteToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.deleteToolStripMenuItem.Text = "Delete Application";
@@ -363,6 +419,7 @@
             // 
             // loansApprovalToolStripMenuItem1
             // 
+            this.loansApprovalToolStripMenuItem1.Image = global::MainApp.Properties.Resources.directory3;
             this.loansApprovalToolStripMenuItem1.Name = "loansApprovalToolStripMenuItem1";
             this.loansApprovalToolStripMenuItem1.Size = new System.Drawing.Size(199, 22);
             this.loansApprovalToolStripMenuItem1.Text = "Loan Application Status";
@@ -373,6 +430,7 @@
             this.loanCatalogueToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.postRepaymentToolStripMenuItem,
             this.deleteRepaymentToolStripMenuItem});
+            this.loanCatalogueToolStripMenuItem.Image = global::MainApp.Properties.Resources.savings;
             this.loanCatalogueToolStripMenuItem.Name = "loanCatalogueToolStripMenuItem";
             this.loanCatalogueToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.loanCatalogueToolStripMenuItem.Text = "Loan Repayment";
@@ -390,6 +448,52 @@
             this.deleteRepaymentToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.deleteRepaymentToolStripMenuItem.Text = "Delete Repayment";
             // 
+            // viewLoansToolStripMenuItem
+            // 
+            this.viewLoansToolStripMenuItem.Name = "viewLoansToolStripMenuItem";
+            this.viewLoansToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.viewLoansToolStripMenuItem.Text = "View Loans";
+            this.viewLoansToolStripMenuItem.Click += new System.EventHandler(this.viewLoansToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(196, 6);
+            // 
+            // loanBrougntForwardToolStripMenuItem
+            // 
+            this.loanBrougntForwardToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newLoanBFToolStripMenuItem,
+            this.editToolStripMenuItem1,
+            this.deleteToolStripMenuItem2});
+            this.loanBrougntForwardToolStripMenuItem.Name = "loanBrougntForwardToolStripMenuItem";
+            this.loanBrougntForwardToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.loanBrougntForwardToolStripMenuItem.Text = "Loan Brought Forward";
+            // 
+            // newLoanBFToolStripMenuItem
+            // 
+            this.newLoanBFToolStripMenuItem.Image = global::MainApp.Properties.Resources.New_document;
+            this.newLoanBFToolStripMenuItem.Name = "newLoanBFToolStripMenuItem";
+            this.newLoanBFToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.newLoanBFToolStripMenuItem.Text = "New";
+            this.newLoanBFToolStripMenuItem.Click += new System.EventHandler(this.newLoanBFToolStripMenuItem_Click);
+            // 
+            // editToolStripMenuItem1
+            // 
+            this.editToolStripMenuItem1.Image = global::MainApp.Properties.Resources.edit_savings;
+            this.editToolStripMenuItem1.Name = "editToolStripMenuItem1";
+            this.editToolStripMenuItem1.Size = new System.Drawing.Size(107, 22);
+            this.editToolStripMenuItem1.Text = "Edit";
+            this.editToolStripMenuItem1.Click += new System.EventHandler(this.editToolStripMenuItem1_Click);
+            // 
+            // deleteToolStripMenuItem2
+            // 
+            this.deleteToolStripMenuItem2.Image = global::MainApp.Properties.Resources.Erase;
+            this.deleteToolStripMenuItem2.Name = "deleteToolStripMenuItem2";
+            this.deleteToolStripMenuItem2.Size = new System.Drawing.Size(107, 22);
+            this.deleteToolStripMenuItem2.Text = "Delete";
+            this.deleteToolStripMenuItem2.Click += new System.EventHandler(this.deleteToolStripMenuItem2_Click);
+            // 
             // deductionsToolStripMenuItem
             // 
             this.deductionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -405,13 +509,15 @@
             this.postDeductionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.individualToolStripMenuItem,
             this.collectiveToolStripMenuItem});
+            this.postDeductionsToolStripMenuItem.Image = global::MainApp.Properties.Resources.savings;
             this.postDeductionsToolStripMenuItem.Name = "postDeductionsToolStripMenuItem";
-            this.postDeductionsToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.postDeductionsToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.postDeductionsToolStripMenuItem.Text = "Post Deductions";
             this.postDeductionsToolStripMenuItem.Click += new System.EventHandler(this.postDeductionsToolStripMenuItem_Click);
             // 
             // individualToolStripMenuItem
             // 
+            this.individualToolStripMenuItem.Image = global::MainApp.Properties.Resources.add_member1;
             this.individualToolStripMenuItem.Name = "individualToolStripMenuItem";
             this.individualToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.individualToolStripMenuItem.Text = "Individual";
@@ -419,6 +525,7 @@
             // 
             // collectiveToolStripMenuItem
             // 
+            this.collectiveToolStripMenuItem.Image = global::MainApp.Properties.Resources.members;
             this.collectiveToolStripMenuItem.Name = "collectiveToolStripMenuItem";
             this.collectiveToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.collectiveToolStripMenuItem.Text = "Collective";
@@ -426,16 +533,19 @@
             // 
             // viewDeductionsToolStripMenuItem
             // 
+            this.viewDeductionsToolStripMenuItem.Image = global::MainApp.Properties.Resources.Text_preview;
             this.viewDeductionsToolStripMenuItem.Name = "viewDeductionsToolStripMenuItem";
-            this.viewDeductionsToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.viewDeductionsToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.viewDeductionsToolStripMenuItem.Text = "View Deductions";
             this.viewDeductionsToolStripMenuItem.Click += new System.EventHandler(this.viewDeductionsToolStripMenuItem_Click);
             // 
             // deleteDeductionsToolStripMenuItem
             // 
+            this.deleteDeductionsToolStripMenuItem.Image = global::MainApp.Properties.Resources.remove_icon_png_26_new;
             this.deleteDeductionsToolStripMenuItem.Name = "deleteDeductionsToolStripMenuItem";
-            this.deleteDeductionsToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-            this.deleteDeductionsToolStripMenuItem.Text = "Delete Deductions";
+            this.deleteDeductionsToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.deleteDeductionsToolStripMenuItem.Text = "Unpost Deductions";
+            this.deleteDeductionsToolStripMenuItem.Click += new System.EventHandler(this.deleteDeductionsToolStripMenuItem_Click);
             // 
             // reportsToolStripMenuItem
             // 
@@ -475,6 +585,8 @@
             // 
             // savingsToolStripMenuItem1
             // 
+            this.savingsToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.memberSavingsToolStripMenuItem});
             this.savingsToolStripMenuItem1.Name = "savingsToolStripMenuItem1";
             this.savingsToolStripMenuItem1.Size = new System.Drawing.Size(196, 22);
             this.savingsToolStripMenuItem1.Text = "Savings";
@@ -689,6 +801,18 @@
             this.deleteTypeToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.deleteTypeToolStripMenuItem.Text = "Delete Type";
             // 
+            // dBBackupToolStripMenuItem
+            // 
+            this.dBBackupToolStripMenuItem.Name = "dBBackupToolStripMenuItem";
+            this.dBBackupToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.dBBackupToolStripMenuItem.Text = "DB Backup";
+            // 
+            // usersToolStripMenuItem
+            // 
+            this.usersToolStripMenuItem.Name = "usersToolStripMenuItem";
+            this.usersToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.usersToolStripMenuItem.Text = "Users";
+            // 
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -775,7 +899,9 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusOps,
-            this.toolStripStatusLoggedInUser});
+            this.toolStripStatusLabel1,
+            this.toolStripStatusLblSpring,
+            this.toolStripStatusLblLoggedInUser});
             this.statusStrip1.Location = new System.Drawing.Point(0, 382);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(769, 22);
@@ -788,30 +914,58 @@
             this.toolStripStatusOps.Size = new System.Drawing.Size(48, 17);
             this.toolStripStatusOps.Text = "Ready...";
             // 
-            // toolStripStatusLoggedInUser
+            // toolStripStatusLabel1
             // 
-            this.toolStripStatusLoggedInUser.Name = "toolStripStatusLoggedInUser";
-            this.toolStripStatusLoggedInUser.Size = new System.Drawing.Size(118, 17);
-            this.toolStripStatusLoggedInUser.Text = "toolStripStatusLabel1";
-            this.toolStripStatusLoggedInUser.Visible = false;
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(266, 17);
+            this.toolStripStatusLabel1.Spring = true;
             // 
-            // usersToolStripMenuItem
+            // toolStripStatusLblSpring
             // 
-            this.usersToolStripMenuItem.Name = "usersToolStripMenuItem";
-            this.usersToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
-            this.usersToolStripMenuItem.Text = "Users";
+            this.toolStripStatusLblSpring.Name = "toolStripStatusLblSpring";
+            this.toolStripStatusLblSpring.Size = new System.Drawing.Size(266, 17);
+            this.toolStripStatusLblSpring.Spring = true;
             // 
-            // dBBackupToolStripMenuItem
+            // toolStripStatusLblLoggedInUser
             // 
-            this.dBBackupToolStripMenuItem.Name = "dBBackupToolStripMenuItem";
-            this.dBBackupToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.dBBackupToolStripMenuItem.Text = "DB Backup";
+            this.toolStripStatusLblLoggedInUser.Name = "toolStripStatusLblLoggedInUser";
+            this.toolStripStatusLblLoggedInUser.Size = new System.Drawing.Size(173, 17);
+            this.toolStripStatusLblLoggedInUser.Text = "toolStripStatusLblLoggedInUser";
+            // 
+            // lblLoggedInUserID
+            // 
+            this.lblLoggedInUserID.AutoSize = true;
+            this.lblLoggedInUserID.Location = new System.Drawing.Point(12, 82);
+            this.lblLoggedInUserID.Name = "lblLoggedInUserID";
+            this.lblLoggedInUserID.Size = new System.Drawing.Size(95, 13);
+            this.lblLoggedInUserID.TabIndex = 7;
+            this.lblLoggedInUserID.Text = "lblLoggedInUserID";
+            this.lblLoggedInUserID.Visible = false;
+            // 
+            // lblLoggedInUserName
+            // 
+            this.lblLoggedInUserName.AutoSize = true;
+            this.lblLoggedInUserName.Location = new System.Drawing.Point(12, 106);
+            this.lblLoggedInUserName.Name = "lblLoggedInUserName";
+            this.lblLoggedInUserName.Size = new System.Drawing.Size(112, 13);
+            this.lblLoggedInUserName.TabIndex = 8;
+            this.lblLoggedInUserName.Text = "lblLoggedInUserName";
+            this.lblLoggedInUserName.Visible = false;
+            // 
+            // memberSavingsToolStripMenuItem
+            // 
+            this.memberSavingsToolStripMenuItem.Name = "memberSavingsToolStripMenuItem";
+            this.memberSavingsToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.memberSavingsToolStripMenuItem.Text = "Member Savings";
+            this.memberSavingsToolStripMenuItem.Click += new System.EventHandler(this.memberSavingsToolStripMenuItem_Click);
             // 
             // MainApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(769, 404);
+            this.Controls.Add(this.lblLoggedInUserName);
+            this.Controls.Add(this.lblLoggedInUserID);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);
@@ -839,8 +993,6 @@
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem logOffToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem exitApplicationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem membershipToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem savingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loansToolStripMenuItem;
@@ -907,7 +1059,6 @@
         private System.Windows.Forms.ToolStripMenuItem membersPersonalInfoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem membersListToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem memberProfileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLoggedInUser;
         private System.Windows.Forms.ToolStripMenuItem savingsToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem loansToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem deductionsToolStripMenuItem1;
@@ -920,6 +1071,23 @@
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem usersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dBBackupToolStripMenuItem;
+        private System.Windows.Forms.Label lblLoggedInUserID;
+        private System.Windows.Forms.Label lblLoggedInUserName;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLblSpring;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLblLoggedInUser;
+        private System.Windows.Forms.ToolStripMenuItem withdrawalToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem loanBrougntForwardToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem makeWithdrawalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deleteWithdrawalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newLoanBFToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem deleteContributionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem viewApplicationsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem viewLoansToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem memberSavingsToolStripMenuItem;
     }
 }
 

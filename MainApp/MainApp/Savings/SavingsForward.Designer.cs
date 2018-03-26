@@ -32,7 +32,6 @@
             this.btnFindMember = new System.Windows.Forms.Button();
             this.txtFileNo = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.picMember = new System.Windows.Forms.PictureBox();
             this.lblMemberProfile = new System.Windows.Forms.Label();
             this.grpBoxSavingsInfo = new System.Windows.Forms.GroupBox();
             this.btnPostSavings = new System.Windows.Forms.Button();
@@ -55,13 +54,14 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.lblMemberTotalSavings = new System.Windows.Forms.Label();
             this.dtGrdVwSavings = new System.Windows.Forms.DataGridView();
+            this.picMember = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picMember)).BeginInit();
             this.grpBoxSavingsInfo.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtGrdVwSavingsForward)).BeginInit();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtGrdVwSavings)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picMember)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -101,16 +101,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "File No.";
             // 
-            // picMember
-            // 
-            this.picMember.Location = new System.Drawing.Point(272, 4);
-            this.picMember.Name = "picMember";
-            this.picMember.Size = new System.Drawing.Size(78, 75);
-            this.picMember.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picMember.TabIndex = 1;
-            this.picMember.TabStop = false;
-            this.picMember.Visible = false;
-            // 
             // lblMemberProfile
             // 
             this.lblMemberProfile.AutoSize = true;
@@ -148,11 +138,14 @@
             // btnPostSavings
             // 
             this.btnPostSavings.Enabled = false;
-            this.btnPostSavings.Location = new System.Drawing.Point(423, 431);
+            this.btnPostSavings.Image = global::MainApp.Properties.Resources.save;
+            this.btnPostSavings.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnPostSavings.Location = new System.Drawing.Point(428, 431);
             this.btnPostSavings.Name = "btnPostSavings";
-            this.btnPostSavings.Size = new System.Drawing.Size(104, 33);
+            this.btnPostSavings.Size = new System.Drawing.Size(99, 33);
             this.btnPostSavings.TabIndex = 13;
             this.btnPostSavings.Text = "Post Savings";
+            this.btnPostSavings.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnPostSavings.UseVisualStyleBackColor = true;
             this.btnPostSavings.Click += new System.EventHandler(this.btnPostSavings_Click);
             // 
@@ -176,11 +169,14 @@
             // btnRemoveSavings
             // 
             this.btnRemoveSavings.Enabled = false;
-            this.btnRemoveSavings.Location = new System.Drawing.Point(450, 294);
+            this.btnRemoveSavings.Image = global::MainApp.Properties.Resources.Erase;
+            this.btnRemoveSavings.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRemoveSavings.Location = new System.Drawing.Point(447, 294);
             this.btnRemoveSavings.Name = "btnRemoveSavings";
-            this.btnRemoveSavings.Size = new System.Drawing.Size(74, 27);
+            this.btnRemoveSavings.Size = new System.Drawing.Size(77, 27);
             this.btnRemoveSavings.TabIndex = 10;
             this.btnRemoveSavings.Text = "Remove";
+            this.btnRemoveSavings.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnRemoveSavings.UseVisualStyleBackColor = true;
             this.btnRemoveSavings.Click += new System.EventHandler(this.btnRemoveSavings_Click);
             // 
@@ -233,6 +229,7 @@
             // 
             // cboYear
             // 
+            this.cboYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboYear.FormattingEnabled = true;
             this.cboYear.Items.AddRange(new object[] {
             "",
@@ -274,6 +271,7 @@
             // 
             // cboMonth
             // 
+            this.cboMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboMonth.FormattingEnabled = true;
             this.cboMonth.Items.AddRange(new object[] {
             "",
@@ -293,6 +291,7 @@
             this.cboMonth.Name = "cboMonth";
             this.cboMonth.Size = new System.Drawing.Size(147, 23);
             this.cboMonth.TabIndex = 3;
+            this.cboMonth.SelectedIndexChanged += new System.EventHandler(this.cboMonth_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -328,7 +327,7 @@
             this.groupBox3.Controls.Add(this.dtGrdVwSavingsForward);
             this.groupBox3.Location = new System.Drawing.Point(546, 83);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(574, 243);
+            this.groupBox3.Size = new System.Drawing.Size(623, 243);
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Savings Brought Forward";
@@ -351,8 +350,9 @@
             this.dtGrdVwSavingsForward.Location = new System.Drawing.Point(10, 19);
             this.dtGrdVwSavingsForward.Name = "dtGrdVwSavingsForward";
             this.dtGrdVwSavingsForward.ReadOnly = true;
-            this.dtGrdVwSavingsForward.Size = new System.Drawing.Size(558, 191);
+            this.dtGrdVwSavingsForward.Size = new System.Drawing.Size(607, 191);
             this.dtGrdVwSavingsForward.TabIndex = 0;
+            this.dtGrdVwSavingsForward.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGrdVwSavingsForward_CellContentClick);
             // 
             // groupBox4
             // 
@@ -360,7 +360,7 @@
             this.groupBox4.Controls.Add(this.dtGrdVwSavings);
             this.groupBox4.Location = new System.Drawing.Point(546, 331);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(574, 224);
+            this.groupBox4.Size = new System.Drawing.Size(623, 224);
             this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Savings";
@@ -383,14 +383,26 @@
             this.dtGrdVwSavings.Location = new System.Drawing.Point(12, 20);
             this.dtGrdVwSavings.Name = "dtGrdVwSavings";
             this.dtGrdVwSavings.ReadOnly = true;
-            this.dtGrdVwSavings.Size = new System.Drawing.Size(556, 172);
+            this.dtGrdVwSavings.Size = new System.Drawing.Size(605, 172);
             this.dtGrdVwSavings.TabIndex = 0;
+            // 
+            // picMember
+            // 
+            this.picMember.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picMember.Location = new System.Drawing.Point(272, 4);
+            this.picMember.Name = "picMember";
+            this.picMember.Size = new System.Drawing.Size(78, 75);
+            this.picMember.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picMember.TabIndex = 1;
+            this.picMember.TabStop = false;
+            this.picMember.Visible = false;
             // 
             // SavingsForward
             // 
+            this.AcceptButton = this.btnFindMember;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1126, 568);
+            this.ClientSize = new System.Drawing.Size(1181, 568);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.grpBoxSavingsInfo);
@@ -405,7 +417,6 @@
             this.Load += new System.EventHandler(this.SavingsForward_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picMember)).EndInit();
             this.grpBoxSavingsInfo.ResumeLayout(false);
             this.grpBoxSavingsInfo.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -414,6 +425,7 @@
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtGrdVwSavings)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picMember)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

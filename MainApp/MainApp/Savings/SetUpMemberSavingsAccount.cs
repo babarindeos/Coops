@@ -139,7 +139,7 @@ namespace MainApp
 
                         }
 
-                        if (reader["Remark"].ToString() == "Personal Savings")
+                        if (reader["Remark"].ToString() == "Shares Savings")
                         {
                             txtRegularSavings.Text = CheckForNumber.formatCurrency(reader["Amount"].ToString());
                             totalSavings += Convert.ToDecimal(reader["Amount"]);

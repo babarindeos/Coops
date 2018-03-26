@@ -36,6 +36,7 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.datGVContributions = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cboMemberSavingsType = new System.Windows.Forms.ComboBox();
             this.panelTellerDetails = new System.Windows.Forms.Panel();
             this.txtOtherPayments = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -64,7 +65,6 @@
             this.lblSelTransactionalID = new System.Windows.Forms.Label();
             this.lblSavingsID = new System.Windows.Forms.Label();
             this.lblSelMemberID = new System.Windows.Forms.Label();
-            this.cboMemberSavingsType = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.picMember)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -175,6 +175,14 @@
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Contributions Details";
+            // 
+            // cboMemberSavingsType
+            // 
+            this.cboMemberSavingsType.FormattingEnabled = true;
+            this.cboMemberSavingsType.Location = new System.Drawing.Point(290, 71);
+            this.cboMemberSavingsType.Name = "cboMemberSavingsType";
+            this.cboMemberSavingsType.Size = new System.Drawing.Size(208, 25);
+            this.cboMemberSavingsType.TabIndex = 16;
             // 
             // panelTellerDetails
             // 
@@ -460,16 +468,9 @@
             this.lblSelMemberID.Text = "lblSelMemberID";
             this.lblSelMemberID.Visible = false;
             // 
-            // cboMemberSavingsType
-            // 
-            this.cboMemberSavingsType.FormattingEnabled = true;
-            this.cboMemberSavingsType.Location = new System.Drawing.Point(290, 71);
-            this.cboMemberSavingsType.Name = "cboMemberSavingsType";
-            this.cboMemberSavingsType.Size = new System.Drawing.Size(208, 25);
-            this.cboMemberSavingsType.TabIndex = 16;
-            // 
             // EditContributions
             // 
+            this.AcceptButton = this.btnFindMember;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1084, 550);

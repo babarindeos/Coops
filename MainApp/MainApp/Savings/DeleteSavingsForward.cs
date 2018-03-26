@@ -179,7 +179,7 @@ namespace MainApp
 
                             if ((reader["SavingsTypeID"].ToString()) == "99")
                             {
-                                savingsAcct = "Personal Savings";
+                                savingsAcct = "Shares Savings";
                             }
                             else
                             {

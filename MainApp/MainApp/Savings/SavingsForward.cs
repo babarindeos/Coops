@@ -122,7 +122,7 @@ namespace MainApp
                 cboSavingsAcct.DisplayMember = "SavingsName";
 
                 DataRow row = dt.NewRow();
-                row["SavingsName"] = "Personal Savings";
+                row["SavingsName"] = "Shares Savings";
                 row["SavingsTypeID"] = 99;
 
                 dt.Rows.InsertAt(row, 0);
@@ -143,10 +143,8 @@ namespace MainApp
         private void loadDataSetSavingsForward()
         {
             SqlConnection conn = ConnectDB.GetConnection();
-            string strQuery = "Select m.Month, sf.Year, acct.SavingsName as 'Account', sf.Amount, sf.TransactionID, sf.Date from Savings sf " +
-                "left join MonthByName m on sf.Month=m.MonthID " +
-                "left join SavingsForward savingsF on sf.SavingsID=savingsF.SavingsID " +                
-                "left join TempSavingsAcctType acct on acct.SavingsTypeID=savingsF.SavingsTypeID " +                               
+            string strQuery = "Select sf.SavingsID, m.Month, sf.Year, sf.Amount, sf.TransactionID, sf.Date from Savings sf " +
+                "left join MonthByName m on sf.Month=m.MonthID " +                                              
                 "where sf.MemberID=" + memberID + " and sf.SavingSource='SavingsForward' order by sf.savingsID desc";
 
             string strQuery2 = "Select Sum(Amount) as TotalSavingsForward from Savings where MemberID=" + memberID + " and SavingSource='SavingsForward'";
@@ -155,6 +153,11 @@ namespace MainApp
 
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
+
+            dtGrdVwSavingsForward.DataSource = null;
+            dtGrdVwSavingsForward.Columns.Clear();
+            dtGrdVwSavingsForward.Rows.Clear();
+            dtGrdVwSavingsForward.Refresh();
 
             try
             {
@@ -166,9 +169,17 @@ namespace MainApp
 
                 int rowFound = dtGrdVwSavingsForward.Rows.Count;
 
+                dtGrdVwSavingsForward.Columns["SavingsID"].Visible = false;
                 dtGrdVwSavingsForward.Columns["Amount"].DefaultCellStyle.Format = "N2";
                 dtGrdVwSavingsForward.Columns["Amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
                 dtGrdVwSavingsForward.Columns["Year"].Width = 60;
+
+                DataGridViewButtonColumn btn = new DataGridViewButtonColumn();
+                dtGrdVwSavingsForward.Columns.Add(btn);
+                btn.HeaderText = "Action";
+                btn.Text = "Details";
+                btn.Name = "btn";
+                btn.UseColumnTextForButtonValue = true;
 
                 if (rowFound > 0)
                 {
@@ -275,7 +286,7 @@ namespace MainApp
 
         private void lstVwSavings_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (lstVwSavings.Items[0].Selected)
+            if (lstVwSavings.SelectedItems.Count>0)
             {
                 btnRemoveSavings.Enabled = true;
             }
@@ -288,7 +299,7 @@ namespace MainApp
 
         private void btnRemoveSavings_Click(object sender, EventArgs e)
         {
-            if (lstVwSavings.Items[0].Selected)
+            if (lstVwSavings.SelectedItems.Count>0)
             {
                 decimal selAmount = Convert.ToDecimal(lstVwSavings.SelectedItems[0].SubItems[2].Text.ToString());
                 totalAmount = totalAmount - selAmount;
@@ -303,6 +314,17 @@ namespace MainApp
         }
 
         private void btnPostSavings_Click(object sender, EventArgs e)
+        {
+            DialogResult res = MessageBox.Show("Do you wish to execute this posting?", "Savings Forward", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (DialogResult.Yes == res)
+            {
+                ExecuteSave();
+                //reset totalAmount
+                totalAmount = 0;
+            }
+        }
+
+        private void ExecuteSave()
         {
             SqlConnection conn = null;
             SqlCommand cmd = null;
@@ -514,6 +536,24 @@ namespace MainApp
                 conn.Close();
             }
 
+        }
+
+        private void cboMonth_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dtGrdVwSavingsForward_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 6)
+            {
+                string savingsID = dtGrdVwSavingsForward.Rows[e.RowIndex].Cells[0].Value.ToString();
+                string savingSource = "SavingsForward";
+                string transactionID = dtGrdVwSavingsForward.Rows[e.RowIndex].Cells[4].Value.ToString();
+                ViewSavingsDetails viewSavingsDetails = new ViewSavingsDetails(savingsID, savingSource, transactionID);
+                viewSavingsDetails.MdiParent = this.ParentForm;
+                viewSavingsDetails.Show();
+            }
         }
        
 

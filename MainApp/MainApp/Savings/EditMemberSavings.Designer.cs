@@ -32,6 +32,8 @@
             this.btnFindMember = new System.Windows.Forms.Button();
             this.txtFileNo = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lblTotalSavings = new System.Windows.Forms.Label();
+            this.lblRecordNo = new System.Windows.Forms.Label();
             this.txtSavingsType = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -43,8 +45,6 @@
             this.lblMemberProfileInfo = new System.Windows.Forms.Label();
             this.lblRegistrationDate = new System.Windows.Forms.Label();
             this.picMember = new System.Windows.Forms.PictureBox();
-            this.lblRecordNo = new System.Windows.Forms.Label();
-            this.lblTotalSavings = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picMember)).BeginInit();
@@ -99,6 +99,26 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "List of Saving Types";
+            // 
+            // lblTotalSavings
+            // 
+            this.lblTotalSavings.AutoSize = true;
+            this.lblTotalSavings.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalSavings.Location = new System.Drawing.Point(259, 366);
+            this.lblTotalSavings.Name = "lblTotalSavings";
+            this.lblTotalSavings.Size = new System.Drawing.Size(101, 17);
+            this.lblTotalSavings.TabIndex = 9;
+            this.lblTotalSavings.Text = "Savings Total: 0";
+            this.lblTotalSavings.Visible = false;
+            // 
+            // lblRecordNo
+            // 
+            this.lblRecordNo.AutoSize = true;
+            this.lblRecordNo.Location = new System.Drawing.Point(13, 366);
+            this.lblRecordNo.Name = "lblRecordNo";
+            this.lblRecordNo.Size = new System.Drawing.Size(111, 17);
+            this.lblRecordNo.TabIndex = 8;
+            this.lblRecordNo.Text = "No. of Records: 0";
             // 
             // txtSavingsType
             // 
@@ -214,28 +234,9 @@
             this.picMember.TabStop = false;
             this.picMember.Visible = false;
             // 
-            // lblRecordNo
-            // 
-            this.lblRecordNo.AutoSize = true;
-            this.lblRecordNo.Location = new System.Drawing.Point(13, 366);
-            this.lblRecordNo.Name = "lblRecordNo";
-            this.lblRecordNo.Size = new System.Drawing.Size(111, 17);
-            this.lblRecordNo.TabIndex = 8;
-            this.lblRecordNo.Text = "No. of Records: 0";
-            // 
-            // lblTotalSavings
-            // 
-            this.lblTotalSavings.AutoSize = true;
-            this.lblTotalSavings.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalSavings.Location = new System.Drawing.Point(259, 366);
-            this.lblTotalSavings.Name = "lblTotalSavings";
-            this.lblTotalSavings.Size = new System.Drawing.Size(101, 17);
-            this.lblTotalSavings.TabIndex = 9;
-            this.lblTotalSavings.Text = "Savings Total: 0";
-            this.lblTotalSavings.Visible = false;
-            // 
             // EditMemberSavings
             // 
+            this.AcceptButton = this.btnFindMember;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(937, 516);

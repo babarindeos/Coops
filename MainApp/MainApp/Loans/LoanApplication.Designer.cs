@@ -86,6 +86,8 @@
             this.lblMemberProfile = new System.Windows.Forms.Label();
             this.picMember = new System.Windows.Forms.PictureBox();
             this.lblAppMonthYear = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.txtFormFee = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picWitness)).BeginInit();
@@ -96,6 +98,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtFormFee);
+            this.groupBox1.Controls.Add(this.label19);
             this.groupBox1.Controls.Add(this.chkStartRepayment);
             this.groupBox1.Controls.Add(this.chkWitness);
             this.groupBox1.Controls.Add(this.chkSurety2);
@@ -189,6 +193,8 @@
             // btnSaveApplication
             // 
             this.btnSaveApplication.Enabled = false;
+            this.btnSaveApplication.Image = global::MainApp.Properties.Resources.save;
+            this.btnSaveApplication.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSaveApplication.Location = new System.Drawing.Point(363, 461);
             this.btnSaveApplication.Name = "btnSaveApplication";
             this.btnSaveApplication.Size = new System.Drawing.Size(146, 38);
@@ -361,8 +367,9 @@
             this.txtAmount.Location = new System.Drawing.Point(124, 191);
             this.txtAmount.MaxLength = 11;
             this.txtAmount.Name = "txtAmount";
-            this.txtAmount.Size = new System.Drawing.Size(305, 25);
+            this.txtAmount.Size = new System.Drawing.Size(195, 25);
             this.txtAmount.TabIndex = 11;
+            this.txtAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtAmount.TextChanged += new System.EventHandler(this.txtAmount_TextChanged);
             this.txtAmount.Leave += new System.EventHandler(this.txtAmount_Leave);
             // 
@@ -780,6 +787,25 @@
             this.lblAppMonthYear.TabIndex = 5;
             this.lblAppMonthYear.Text = "Application for the month and year";
             // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(325, 195);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(62, 17);
+            this.label19.TabIndex = 31;
+            this.label19.Text = "Form Fee";
+            // 
+            // txtFormFee
+            // 
+            this.txtFormFee.Enabled = false;
+            this.txtFormFee.Location = new System.Drawing.Point(386, 191);
+            this.txtFormFee.Name = "txtFormFee";
+            this.txtFormFee.Size = new System.Drawing.Size(121, 25);
+            this.txtFormFee.TabIndex = 12;
+            this.txtFormFee.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtFormFee.Leave += new System.EventHandler(this.txtFormFee_Leave);
+            // 
             // LoanApplication
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -866,5 +892,7 @@
         private System.Windows.Forms.Label lblSuretyMemberID_1;
         private System.Windows.Forms.TextBox txtMonthRepayment;
         private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox txtFormFee;
+        private System.Windows.Forms.Label label19;
     }
 }

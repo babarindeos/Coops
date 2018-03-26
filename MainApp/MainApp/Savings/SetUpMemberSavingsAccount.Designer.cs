@@ -167,9 +167,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(8, 30);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(106, 17);
+            this.label2.Size = new System.Drawing.Size(95, 17);
             this.label2.TabIndex = 5;
-            this.label2.Text = "Personal Savings";
+            this.label2.Text = "Shares Savings";
             // 
             // lblTotalSavings
             // 
@@ -250,6 +250,7 @@
             // 
             // SetUpMemberSavingsAccount
             // 
+            this.AcceptButton = this.btnFindRecord;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(806, 525);
